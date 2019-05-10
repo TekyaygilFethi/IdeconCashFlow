@@ -33,9 +33,8 @@ namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder
             }
             else
             {
-                if (SecurityFolder.Security.VerifyPassword(user.Password, password))
+                if (user.Password.Equals(lgnForm.Password))
                     response.IsSuccess = true;
-
                 else
                 {
                     response.IsSuccess = false;
