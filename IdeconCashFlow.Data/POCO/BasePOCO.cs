@@ -39,5 +39,7 @@ namespace IdeconCashFlow.Data.POCO
         public virtual User Duzenleyen { get; set; }
 
         public int? DuzenleyenUserID { get; set; }
+
+        public bool IsUserCreation { get; set; }
     }
 }
