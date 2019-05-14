@@ -5,9 +5,11 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Data", "IdeconCashFlow.Data\IdeconCashFlow.Data.csproj", "{20602348-F880-4E48-B410-6104B7D6FE8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Business", "IdeconCashFlow.Business\IdeconCashFlow.Business.csproj", "{8C907992-C969-4A58-AE48-33B952133D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Business", "IdeconCashFlow.Business\IdeconCashFlow.Business.csproj", "{8C907992-C969-4A58-AE48-33B952133D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Database", "IdeconCashFlow.Database\IdeconCashFlow.Database.csproj", "{C8632B7B-1FD8-4DAD-8D0A-D83C5CE75962}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Helper", "IdeconCashFlow.Helper\IdeconCashFlow.Helper.csproj", "{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Api", "IdeconCashFlow.Api\IdeconCashFlow.Api.csproj", "{35E71166-5A5F-4487-9C33-33EE607B1499}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +25,14 @@ Global
 		{8C907992-C969-4A58-AE48-33B952133D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C907992-C969-4A58-AE48-33B952133D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C907992-C969-4A58-AE48-33B952133D8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C8632B7B-1FD8-4DAD-8D0A-D83C5CE75962}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C8632B7B-1FD8-4DAD-8D0A-D83C5CE75962}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C8632B7B-1FD8-4DAD-8D0A-D83C5CE75962}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C8632B7B-1FD8-4DAD-8D0A-D83C5CE75962}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E71166-5A5F-4487-9C33-33EE607B1499}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E71166-5A5F-4487-9C33-33EE607B1499}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E71166-5A5F-4487-9C33-33EE607B1499}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E71166-5A5F-4487-9C33-33EE607B1499}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
