@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Data", "Idec
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Business", "IdeconCashFlow.Business\IdeconCashFlow.Business.csproj", "{8C907992-C969-4A58-AE48-33B952133D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Helper", "IdeconCashFlow.Helper\IdeconCashFlow.Helper.csproj", "{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Helper", "IdeconCashFlow.Helper\IdeconCashFlow.Helper.csproj", "{1712DE05-EA3D-42D4-8B7D-8C24261D4B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IdeconCashFlow.Api", "IdeconCashFlow.Api\IdeconCashFlow.Api.csproj", "{35E71166-5A5F-4487-9C33-33EE607B1499}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Api", "IdeconCashFlow.Api\IdeconCashFlow.Api.csproj", "{35E71166-5A5F-4487-9C33-33EE607B1499}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IdeconCashFlow.Database", "IdeconCashFlow.Database\IdeconCashFlow.Database.csproj", "{35E02A63-9A86-41B2-AEBB-A2DD70F60F71}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{35E71166-5A5F-4487-9C33-33EE607B1499}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35E71166-5A5F-4487-9C33-33EE607B1499}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35E71166-5A5F-4487-9C33-33EE607B1499}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35E02A63-9A86-41B2-AEBB-A2DD70F60F71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35E02A63-9A86-41B2-AEBB-A2DD70F60F71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35E02A63-9A86-41B2-AEBB-A2DD70F60F71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35E02A63-9A86-41B2-AEBB-A2DD70F60F71}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
