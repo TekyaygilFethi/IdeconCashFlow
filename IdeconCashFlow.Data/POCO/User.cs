@@ -14,6 +14,10 @@ namespace IdeconCashFlow.Data.POCO
         //[Index(IsUnique =true)]
         public string Username { get; set; }
 
+        public string Name { get; set; }
+
+        public string Surname { get; set; }
+
         [Column("Şifre")]
         [Required]
         [DataType(DataType.Password)]
