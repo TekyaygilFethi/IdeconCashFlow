@@ -1,0 +1,1023 @@
+{
+    "inputHeaders": {
+        "statusCode": 200,
+        "message": "İşlem başarılı",
+        "response": {
+            "totalPageCount": 6,
+            "itemCount": 10,
+            "totals": [
+                {
+                    "key": "try",
+                    "value": -1865.00
+                },
+                {
+                    "key": "usd",
+                    "value": 245.00
+                },
+                {
+                    "key": "eur",
+                    "value": -40.00
+                },
+                {
+                    "key": "gbp",
+                    "value": 385
+                },
+                {
+                    "key": "jpy",
+                    "value": 125
+                }
+            ],
+            "headers": [
+                {
+                    "id": "10525-50153-5216",
+                    "flowDirectionSymbol": "+",
+                    "flowDirectionExplanation": "Giriş",
+                    "title": "Banka bakiyeleri",
+                    "currencies": [
+                        {
+                            "key": "try",
+                            "value": 10.00
+                        },
+                        {
+                            "key": "usd",
+                            "value": 150.00
+                        },
+                        {
+                            "key": "eur",
+                            "value": 15.00
+                        },
+                        {
+                            "key": "gbp",
+                            "value": 120
+                        },
+                        {
+                            "key": "jpy",
+                            "value": 140
+                        }
+                    ]
+                },
+                {
+                    "id": "10525-50153-0011",
+                    "flowDirectionSymbol": "-",
+                    "flowDirectionExplanation": "Çıkış",
+                    "title": "Müşteri tahsilat",
+                    "currencies": [
+                        {
+                            "key": "try",
+                            "value": -1100
+                        },
+                        {
+                            "key": "usd",
+                            "value": -100.00
+                        },
+                        {
+                            "key": "eur",
+                            "value": 0
+                        },
+                        {
+                            "key": "gbp",
+                            "value": -20
+                        },
+                        {
+                            "key": "jpy",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "10525-50153-0011",
+                    "flowDirectionSymbol": "+",
+                    "flowDirectionExplanation": "Giriş",
+                    "title": "Ürün Geliri",
+                    "currencies": [
+                        {
+                            "key": "try",
+                            "value": 1050
+                        },
+                        {
+                            "key": "usd",
+                            "value": 100.00
+                        },
+                        {
+                            "key": "eur",
+                            "value": 10.00
+                        },
+                        {
+                            "key": "gbp",
+                            "value": 0
+                        },
+                        {
+                            "key": "jpy",
+                            "value": 175
+                        }
+                    ]
+                },
+                {
+                    "id": "10525-50153-0011",
+                    "flowDirectionSymbol": "+",
+                    "flowDirectionExplanation": "Giriş",
+                    "title": "Müşteri Ödemesi",
+                    "currencies": [
+                        {
+                            "key": "try",
+                            "value": 675
+                        },
+                        {
+                            "key": "usd",
+                            "value": 245.00
+                        },
+                        {
+                            "key": "eur",
+                            "value": 105.00
+                        },
+                        {
+                            "key": "gbp",
+                            "value": 285
+                        },
+                        {
+                            "key": "jpy",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "id": "10525-50153-00221",
+                    "flowDirectionSymbol": "-",
+                    "flowDirectionExplanation": "Çıkış",
+                    "title": "Faturalar",
+                    "currencies": [
+                        {
+                            "key": "try",
+                            "value": -2500
+                        },
+                        {
+                            "key": "usd",
+                            "value": -100.00
+                        },
+                        {
+                            "key": "eur",
+                            "value": -170.00
+                        },
+                        {
+                            "key": "gbp",
+                            "value": 0
+                        },
+                        {
+                            "key": "jpy",
+                            "value": -190
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "getDetail": {
+        "statusCode": 200,
+        "message": "İşlem başarılı",
+        "response": {
+            "totals":[
+                {
+                    "AnaBaslikID": "11111",
+                    "ParaBirimi":"TRY",
+                    "ToplamTutar":1915
+                },
+                {
+                    "AnaBaslikID": "11111",
+                    "ParaBirimi":"USD",
+                    "ToplamTutar":1220
+                },
+                {
+                    "AnaBaslikID": "11111",
+                    "ParaBirimi":"EUR",
+                    "ToplamTutar":655
+                },
+                {
+                    "AnaBaslikID": "222222",
+                    "ParaBirimi":"TRY",
+                    "ToplamTutar":2190
+                },
+                {
+                    "AnaBaslikID": "222222",
+                    "ParaBirimi":"USD",
+                    "ToplamTutar":1050
+                },
+                {
+                    "AnaBaslikID": "222222",
+                    "ParaBirimi":"EUR",
+                    "ToplamTutar":890
+                },
+                {
+                    "AnaBaslikID": "333333",
+                    "ParaBirimi":"TRY",
+                    "ToplamTutar":4740
+                },
+                {
+                    "AnaBaslikID": "333333",
+                    "ParaBirimi":"USD",
+                    "ToplamTutar":585
+                },
+                {
+                    "AnaBaslikID": "333333",
+                    "ParaBirimi":"EUR",
+                    "ToplamTutar":1070
+                }
+            ],
+            "getDetail": [                
+                {
+                    "VadeTarihi": "21.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 5.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 40.00
+                        }
+                        ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 20.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "21.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 0
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -75.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -10.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "21.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -45.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 0
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -70.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "22.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 105.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 85.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 0.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "22.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 60.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 35.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 45.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "22.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -90.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -60.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 35.00
+                        }
+                    ]
+                },
+                 {
+                    "VadeTarihi": "23.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 105.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 250.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -210.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "23.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 520.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 130.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 220.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "23.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -65.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 85.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 110.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "24.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 75.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -115.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 90.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "24.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 70.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 310.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 95.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "24.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -320.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -150.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 55.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "25.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 15.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 10.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "25.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 50.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 30.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 45.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "25.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 0.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -50.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 55.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "26.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 175.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 0
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 270.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "26.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -600.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 130.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 35.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "26.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 65.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -25.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 75.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "26.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 155.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 170.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 35.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "26.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -540.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 130.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 75.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "26.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 230.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -150.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 95.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "27.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 715.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 410.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 155.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "27.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar":-550.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -730.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 195.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "27.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 540.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 150.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 45.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "28.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 415.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 130.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 210.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "28.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 550.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 230.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -245.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "28.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 230.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 410.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 350.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "29.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": -125.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 140.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 375.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "29.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 230.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 270.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -75.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "29.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 670.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 50.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 85.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "30.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 105.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -410.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": -95.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "30.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 950.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 530.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 355.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "30.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 1250.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 50.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 145.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "31.05.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 15.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": -10.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 15.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "31.05.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 50.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 30.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 45.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "31.05.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 0.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 50.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 70.00
+                        }
+                    ]
+                }, {
+                    "VadeTarihi": "01.06.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 315.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 510.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 60.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "01.06.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 750.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 130.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 65.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "01.06.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 2340.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 150.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 50.00
+                        }
+                    ]
+                },{
+                    "VadeTarihi": "02.06.2019",           
+                    "AnaBaslikID": "11111",
+                    "AnaBaslikTanim": "Banka bakiyeleri",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 15.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 10.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "02.06.2019",
+                    
+                    "AnaBaslikID": "222222",
+                    "AnaBaslikTanim": "Müşteri tahsilat",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 50.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 30.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 80.00
+                        }
+                    ]
+                },
+                {
+                    "VadeTarihi": "02.06.2019",
+                    "AnaBaslikID": "333333",
+                    "AnaBaslikTanim": "Tahsilat bakiyesi",
+                    "ParaBirimiTutarlar": [
+                        {
+                            "ParaBirimi": "TRY",
+                            "Tutar": 0.00
+                        },
+                        {
+                            "ParaBirimi": "USD",
+                            "Tutar": 50.00
+                        } ,
+                        {
+                            "ParaBirimi": "EUR",
+                            "Tutar": 45.00
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

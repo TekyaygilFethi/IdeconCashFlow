@@ -1,0 +1,7 @@
+{
+    "name": "modules-index",
+    "version": "0.0.0",
+    "private": true,
+    "main": "modules.index.js"
+  }
+  
