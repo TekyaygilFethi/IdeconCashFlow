@@ -325,11 +325,13 @@ const FormField = props => {
   inputProps.id = id;
   inputProps.name = name;
 
+
+
   return (
     <FormGroup className={`${props.contClass} ${props.compact && 'm-b-0'}`}>
       {props.label && <Label className={props.compact && 'm-b-0'}>{props.label}</Label>}
       <Component {...inputProps} />
-      {props.error && <span className="formError font-italic c-red">{props.error}</span>}
+      {props.error && <span className="errorText">{props.error}</span>}
     </FormGroup>
   );
 };

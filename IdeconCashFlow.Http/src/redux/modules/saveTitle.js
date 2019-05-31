@@ -9,9 +9,11 @@ import api from '../../api';
 
 export function saveTitle(data) {
     return dispatch => {
+        debugger;
         dispatch(createDispatcher(SAVE_TITLE_REQUEST, data));
+        debugger;
         return api
-            .getDetail(data)
+            .saveTitle(data)
             .then(res => {
                 dispatch(createDispatcher(SAVE_TITLE_SUCCESS, res.data));
                 return res;

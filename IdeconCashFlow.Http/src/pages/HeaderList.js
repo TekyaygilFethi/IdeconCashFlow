@@ -100,7 +100,6 @@ class HeaderList extends Component {
 
     render() {
         const { inputHeaders, columns, totals, showColumns, inputHeadersFetching, open } = this.state;
-
         return (
             <>
                 <div className="row">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import {TextField,InputAdornment} from "@material-ui/core/index";
+import {InputAdornment,Select} from "@material-ui/core/index";
 import CreatableSelect from "react-select/lib/Creatable";
 import { FormattedMessage, injectIntl } from "react-intl";
 import NumberFormat from 'react-number-format';
@@ -9,6 +9,7 @@ import { currencyType } from '../utils/helper';
 import moment from 'moment';
 import {MuiPickersUtilsProvider,KeyboardDatePicker} from '@material-ui/pickers';
 import MomentUtils from "@date-io/moment";
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator/lib/index';
 
 import "moment/locale/en-gb";
 import "moment/locale/tr";
@@ -18,7 +19,6 @@ import FormField from "../components/common/FormField";
 import data from "../utils/staticData.json";
 import { control } from "../utils/form";
 import saveTitle from '../redux/modules/saveTitle';
-
 
 const dummyBasliklar = [
     { value: "12542685", label: "Banka Bakiyeleri" },
@@ -31,34 +31,104 @@ const dummyBasliklar = [
     { value: "125412385", label: "Döviz Şatışı" }
 ];
 
+
+const flowDirections = [
+    { value: '+', label: "Gelir (+)" },
+    { value: '-', label: "Gider (-)" }
+];
+
+const errorStyle = {
+    control: (base, state) => ({
+      ...base,
+      '&:hover': { borderColor: 'red' }, // border style on hover
+      border: '1px solid red', // default border color
+      boxShadow: 'none', // no box-shadow
+      // You can also use state.isFocused to conditionally style based on the focus state
+    })
+  };
+
+
 class ItemAddModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            flowDirections: [
-                { value: '+', label: "Gelir (+)" },
-                { value: '-', label: "Gider (-)" }
-            ],
-            flowDirection: "+",
+            
+            flowDirection: "",
+            flowDirectionTouch:false,
+            flowDirectionError:false,
             currency:"",
+            currencyTouch:false,
+            currencyError:false,
             mainTitle: "",
+            mainTitleTouch:false,
+            mainTitleError:false,
             subTitle:"",
             dueDate:new Date(),
             amount:'',
+            dueDateError:true
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.dueDateErrorChangeState = this.dueDateErrorChangeState.bind(this);
+        this.newMainTitle = this.newMainTitle.bind(this);
     }
 
-    newMainTitle(newData) { }
+
+    static getDerivedStateFromProps(nextProps) {
+        const result = {};
+
+        return { ...result };
+    }
+
+    newMainTitle(newData) { 
+        debugger;
+
+        this.props.saveTitle();
+    }
 
     handleSubmit = (values) => {
-        debugger;
+
+
+        if(!this.state.dueDateError) // hatalı
+            alert("hatalıııı")
     }
+
+    dueDateErrorChangeState(dueDateError){
+        debugger;
+        this.setState({
+            dueDateError : dueDateError
+        });
+    }
+
+    handleFlowDirectionChange = (e) => {
+        debugger;
+        if(!this.state.flowDirectionTouch)
+            this.setState({flowDirectionTouch:true});
+
+        if(e.value === ''){
+            this.setState({
+                flowDirectionError:true
+            })
+        }else{
+            this.setState({
+                flowDirectionError:false
+            })
+        }
+    }
+
+    handleMainTitleChange(){
+        
+    }
+
+    handleCurrencyChange(){
+        
+    }
+
+
 
     render() {
         const { intl } = this.props;
-        const {currency} = this.state;
+        const {currency,flowDirection} = this.state;
         
         const currencies = Object.keys(data.currencies)
             .map(i => data.currencies[i])
@@ -85,7 +155,7 @@ class ItemAddModal extends Component {
                     <div className="col-sm-2" />
                     <div className="col-sm-push-2 col-sm-8">
                         <div className="card">
-                            <form onSubmit={this.handleSubmit}>
+                        <ValidatorForm ref="form" onSubmit={this.handleSubmit}>
                             <div className="card-header header-elements-inline">
                                 <h6 className="card-title">Custom background</h6>
                                 <div className="header-elements">
@@ -99,12 +169,13 @@ class ItemAddModal extends Component {
                                 <div className="row">
                                     <div className="col-sm-6">
                                         <label> Akış Yönü:</label>
-                                        <div className="form-group">
+                                        <div className="form-group has-error">
                                             <FormField
                                                 type="select"
+                                                styles={(this.state.flowDirectionTouch && this.state.flowDirectionError ? errorStyle:"") }
                                                 name="flowDirection"
-                                                options={this.state.flowDirections}
-                                                {...control(this, "flowDirection")}
+                                                options={flowDirections}
+                                                {...control(this, "flowDirection",this.handleFlowDirectionChange)}
                                             />
                                         </div>
                                     </div>
@@ -112,6 +183,7 @@ class ItemAddModal extends Component {
                                         <label>Para birimi</label>
                                         <FormField
                                             type="select"
+                                            styles={(this.state.flowDirectionTouch && this.state.flowDirectionError ? errorStyle:"") }
                                             name="currency"
                                             options={currencies}
                                             {...control(this, "currency")}
@@ -122,7 +194,6 @@ class ItemAddModal extends Component {
                                 <div className="form-group">
                                     <label>Başlık Seçimi:</label>
                                     <CreatableSelect
-                                        isClearable
                                         name="mainTitle"
                                         placeholder="Seçim yapınız"
                                         options={dummyBasliklar}
@@ -133,14 +204,15 @@ class ItemAddModal extends Component {
                                     />
                                 </div>
                                 <div className="form-group">
-                                    <TextField
+                                    <TextValidator
                                         label="Alt Başlık"
-                                        required
                                         name="subTitle"
                                         className="form-control"
                                         {...control(this, "subTitle",(e)=>{
                                             return e.target.value;
                                         })}
+                                        validators={['required']}
+                                        errorMessages={['this field is required']}
                                     />
                                 </div>
 
@@ -151,22 +223,37 @@ class ItemAddModal extends Component {
                                                 <KeyboardDatePicker
                                                     format="DD/MM/YYYY"
                                                     name="startDate"
+                                                    minDate={new Date()}
                                                     label={<FormattedMessage id="date.start" />}
                                                     value={this.state.startDate}
                                                     onChange={this.handleChange}
+                                                    invalidDateMessage='uygunsuz'
+                                                    minDateMessage='asdas'
+                                                    invalidLabel="gatalı"
+                                                    emptyLabel={moment(new Date()).format('DD/MM/YYYY')}
+                                                    onError={()=>{
+                                                        if(this.state.dueDateError)
+                                                            this.dueDateErrorChangeState(false)
+                                                    }}
+                                                    onAccept={(e)=>{
+                                                        if(!this.state.dueDateError)
+                                                            this.dueDateErrorChangeState(true)
+                                                    }}
                                                     {...control(this, "startDate")}
                                                 />
                                         </MuiPickersUtilsProvider>
                                     </div>
                                     <div className="col-sm-6">
 
-                                    <TextField
+                                    <TextValidator
                                         name="amount"
                                         label="Tutar"
                                         className="form-control"
                                         {...control(this, "amount",(e)=>{
                                             return e.target.value;
                                         })}
+                                        validators={['required']}
+                                        errorMessages={['this field is required']}
                                         InputProps={{
                                             startAdornment: (
                                               <InputAdornment position="start">
@@ -189,7 +276,7 @@ class ItemAddModal extends Component {
                                     Kaydet <i className="icon-paperplane ml-2" />
                                 </button>
                             </div>
-                            </form>
+                            </ValidatorForm>
                         </div>
                     </div>
                 </div>
@@ -210,4 +297,7 @@ const mapDispatchToProps = {
     saveTitle
 };
 
-export default connect()(injectIntl(ItemAddModal));
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(injectIntl(ItemAddModal));
