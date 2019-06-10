@@ -1,0 +1,14 @@
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Business.deps.json
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Business.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Business.pdb
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Data.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Database.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Database.pdb
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\bin\Release\netcoreapp2.2\IdeconCashFlow.Data.pdb
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.csprojAssemblyReference.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.csproj.CoreCompileInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.AssemblyInfoInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.AssemblyInfo.cs
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.csproj.CopyComplete
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Business\obj\Release\netcoreapp2.2\IdeconCashFlow.Business.pdb

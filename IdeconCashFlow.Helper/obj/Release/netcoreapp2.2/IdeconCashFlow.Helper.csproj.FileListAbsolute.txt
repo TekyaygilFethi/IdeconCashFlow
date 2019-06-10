@@ -1,0 +1,9 @@
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\bin\Release\netcoreapp2.2\IdeconCashFlow.Helper.deps.json
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\bin\Release\netcoreapp2.2\IdeconCashFlow.Helper.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\bin\Release\netcoreapp2.2\IdeconCashFlow.Helper.pdb
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.csprojAssemblyReference.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.csproj.CoreCompileInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.AssemblyInfoInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.AssemblyInfo.cs
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.dll
+C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Helper\obj\Release\netcoreapp2.2\IdeconCashFlow.Helper.pdb

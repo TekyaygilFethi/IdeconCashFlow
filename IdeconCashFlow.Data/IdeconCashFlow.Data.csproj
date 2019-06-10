@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Business\BaslikManagerFormDataFolder\KalemlerGroupByDateResponse.cs" />
+    <Compile Remove="Business\BaslikManagerFormDataFolder\ParaBirimiToplamTutar.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Business\BaslikManagerFormDataFolder\KalemlerGroupByDateResponse.cs" />
+    <None Include="Business\BaslikManagerFormDataFolder\ParaBirimiToplamTutar.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.2" />
+  </ItemGroup>
+
+</Project>

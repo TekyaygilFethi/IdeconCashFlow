@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="IdeconCashFlow.Data.POCO.BasePOCO">
+    <Position X="11.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAAAQAAAAAAAAAABoHAAAgAAAAAAAAAIAAAAA=</HashCode>
+      <FileName>POCO\BasePOCO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdeconCashFlow.Data.POCO.Kalem">
+    <Position X="14.75" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAUAQQEAAAAAEAAAAAAAACAAAAAAEAAAAAAAAA=</HashCode>
+      <FileName>POCO\Kalem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdeconCashFlow.Data.POCO.User">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAEAABQAAAAQABAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>POCO\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdeconCashFlow.Data.POCO.AnaBaslik">
+    <Position X="5.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAIAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>POCO\AnaBaslik.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdeconCashFlow.Data.POCO.ParaBirimi">
+    <Position X="7" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>POCO\ParaBirimi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
