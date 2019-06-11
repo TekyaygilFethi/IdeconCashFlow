@@ -108,6 +108,7 @@ const SelectBox = props => (
     removeSelected={props.removeSelected}
     name={props.name.toString()}
     noOptionsMessage = {props.noOptionsMessage}
+    defaultValue={props.defaultValue}
   />
 );
 

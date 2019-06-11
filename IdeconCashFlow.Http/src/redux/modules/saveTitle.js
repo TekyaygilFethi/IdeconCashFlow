@@ -4,14 +4,9 @@ import createReducer from '../../utils/createReducer';
 import api from '../../api';
 
 
-
-
-
 export function saveTitle(data) {
     return dispatch => {
-        debugger;
         dispatch(createDispatcher(SAVE_TITLE_REQUEST, data));
-        debugger;
         return api
             .saveTitle(data)
             .then(res => {

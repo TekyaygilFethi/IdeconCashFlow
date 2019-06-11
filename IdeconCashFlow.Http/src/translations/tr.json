@@ -32,6 +32,10 @@
   "select.placeHolder":"Seçim yapınız",
   "goBack":"Geri",
 
+  "itemAddModal.dueDateChooseDefinition":"Vade ilişkili olmayan başlıkların vade tarihi günün tarihi olarak eklenir.",
+  "itemAddModal.newMainTitle":"Yeni Ana Başlık Oluşturma",
+  "addTitleModal.saveMainTitle":"Kaydet",
+  
   "USD":"Amerikan Doları",
   "TRY":"Türk Lirası",
   "EUR":"Euro",
