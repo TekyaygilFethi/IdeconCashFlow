@@ -56,7 +56,7 @@
     "sweetalert2": "^8.11.0"
   },
   "scripts": {
-    "start": "react-scripts start & npm run sass & npm run fake-server",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "sass": "gulp sass",
     "test": "react-scripts test",
