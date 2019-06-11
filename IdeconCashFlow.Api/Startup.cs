@@ -1,4 +1,6 @@
-﻿using IdeconCashFlow.Helper;
+﻿using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
+using IdeconCashFlow.Data.Business.UserManagerFormDataFolder;
+using IdeconCashFlow.Helper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +11,8 @@ using Microsoft.IdentityModel.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
+using System.Diagnostics;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -58,12 +62,26 @@ namespace IdeconCashFlow.Api
                 {
                     OnTokenValidated = ctx =>
                     {
-                        //Gerekirse burada gelen token içerisindeki çeşitli bilgilere göre doğrulam yapılabilir.
+                        CashflowComplexManager complexManager = new CashflowComplexManager(true);
+
+                        var principal = ctx.Principal;//Gerekirse burada gelen token içerisindeki çeşitli bilgilere göre doğrulam yapılabilir.
+                        var identity = (ClaimsIdentity)principal.Identity;
+                        string username = identity.FindFirst("Username").Value;
+                        string password = identity.FindFirst("Password").Value;
+                        string sirketKodu = identity.FindFirst("SirketKodu").Value;
+
+                        var authorizeResult = complexManager.CheckUserCreedientalsByJWT(new UserJWT { Username = username, Password = password, SirketKodu = sirketKodu });
+
+                        if(!(authorizeResult.IsSuccess))
+                        {
+                            
+                        }
+
                         return Task.CompletedTask;
                     },
                     OnAuthenticationFailed = ctx =>
                     {
-                        Console.WriteLine("Exception:{0}", ctx.Exception.Message);
+                        Debug.WriteLine("Exception:{0}", ctx.Exception.Message);
                         return Task.CompletedTask;
                     }
                 };
@@ -120,6 +138,7 @@ namespace IdeconCashFlow.Api
             });
 
             app.UseHttpsRedirection();
+            app.UseAuthentication();
             app.UseMvc();
             app.UseCors("MyPolicy");
         }

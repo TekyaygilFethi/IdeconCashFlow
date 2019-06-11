@@ -1,4 +1,4 @@
-﻿using IdeconCashFlow.Api.Filters;
+﻿using Microsoft.AspNetCore.Authorization;
 using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
 using IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder;
 using IdeconCashFlow.Data.Business.GenericResponse;
@@ -14,8 +14,8 @@ namespace IdeconCashFlow.Api.Controllers
 {
     [Route("api/Baslik")]
     [ApiController]
-    [IdeconAuthorization]
-    public class BaslikApiController : ControllerBase
+    
+    public class BaslikApiController : Controller
     {
         CashflowComplexManager cashflowManager;
 
@@ -46,6 +46,7 @@ namespace IdeconCashFlow.Api.Controllers
 
         // GET: api/<controller>
         [HttpGet, Route("GetAllBasliklar")]
+        [Authorize()]
         public IActionResult GetAllBasliklar()
         {
             return Ok(cashflowManager.GetAllBasliklar());

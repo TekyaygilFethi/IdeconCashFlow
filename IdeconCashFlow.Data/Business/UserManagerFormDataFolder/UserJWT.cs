@@ -11,5 +11,7 @@ namespace IdeconCashFlow.Data.Business.UserManagerFormDataFolder
         public string Password { get; set; }
 
         public string SirketKodu { get; set; } = "0000";
+
+        public string Role { get; set; } = "Basic";
     }
 }

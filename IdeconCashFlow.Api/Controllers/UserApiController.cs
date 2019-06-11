@@ -37,7 +37,8 @@ namespace IdeconCashFlow.Api.Controllers
                     var someClaims = new Claim[]{
                     new Claim("Username", user.Username),
                     new Claim("Password",user.Password),
-                    new Claim("SirketKodu",user.SirketKodu)
+                    new Claim("SirketKodu",user.SirketKodu),
+                    new Claim("Rol",user.Yetki)
                     };
 
                     SecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("IDECON1*Pwd is the secret key of this cashflow program"));
@@ -50,7 +51,7 @@ namespace IdeconCashFlow.Api.Controllers
                     );
 
                     return Ok(new JwtSecurityTokenHandler().WriteToken(token));
-                 
+
                 }
                 catch (Exception ex)
                 {
@@ -60,6 +61,6 @@ namespace IdeconCashFlow.Api.Controllers
             else
                 return Unauthorized();
         }
-        
+
     }
 }
