@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdeconCashFlow.Data.POCO
 {
+    [Table("AnaBaslikTable")]
     public class AnaBaslik
     {
         public AnaBaslik()
@@ -13,9 +14,10 @@ namespace IdeconCashFlow.Data.POCO
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [ForeignKey("TekliBaslik")]
         public string ID { get; set; }
 
-        [MaxLength(100000)]
+        [MaxLength(10000)]
         public string BaslikTanimi { get; set; }
 
         public bool IsVadeIliskili { get; set; }
@@ -23,10 +25,8 @@ namespace IdeconCashFlow.Data.POCO
         public string SirketKodu { get; set; }
 
         public virtual List<Kalem> Kalemler { get; set; }
-
-        [ForeignKey("TekliBaslikID")]
+                
         public virtual TekliBaslik TekliBaslik { get; set; }
-
-        public string TekliBaslikID { get; set; }
+        
     }
 }

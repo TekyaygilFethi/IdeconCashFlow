@@ -183,7 +183,7 @@ namespace IdeconCashFlow.Api.Filters
                     new Claim("Username", user.Username),
                     new Claim("Password",user.Password),
                     new Claim("SirketKodu",user.SirketKodu),
-                    new Claim("Rol")
+                    new Claim("Rol",user.Yetki)
                 };
 
                 var identity = new ClaimsIdentity(claims, "Jwt");

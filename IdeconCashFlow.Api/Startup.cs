@@ -62,20 +62,20 @@ namespace IdeconCashFlow.Api
                 {
                     OnTokenValidated = ctx =>
                     {
-                        CashflowComplexManager complexManager = new CashflowComplexManager(true);
+                        //CashflowComplexManager complexManager = new CashflowComplexManager(true);
 
                         var principal = ctx.Principal;//Gerekirse burada gelen token içerisindeki çeşitli bilgilere göre doğrulam yapılabilir.
                         var identity = (ClaimsIdentity)principal.Identity;
-                        string username = identity.FindFirst("Username").Value;
-                        string password = identity.FindFirst("Password").Value;
-                        string sirketKodu = identity.FindFirst("SirketKodu").Value;
+                        //string username = identity.FindFirst("Username").Value;
+                        //string password = identity.FindFirst("Password").Value;
+                        //string sirketKodu = identity.FindFirst("SirketKodu").Value;
 
-                        var authorizeResult = complexManager.CheckUserCreedientalsByJWT(new UserJWT { Username = username, Password = password, SirketKodu = sirketKodu });
+                        //var authorizeResult = complexManager.CheckUserCreedientalsByJWT(new UserJWT { Username = username, Password = password, SirketKodu = sirketKodu });
 
-                        if(!(authorizeResult.IsSuccess))
-                        {
+                        //if(!(authorizeResult.IsSuccess))
+                        //{
                             
-                        }
+                        //}
 
                         return Task.CompletedTask;
                     },
@@ -126,7 +126,7 @@ namespace IdeconCashFlow.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseCorsMiddleware();
+            //app.UseCorsMiddleware();
             app.UseSwagger()
             .UseSwaggerUI(c =>
             {
@@ -139,8 +139,11 @@ namespace IdeconCashFlow.Api
 
             app.UseHttpsRedirection();
             app.UseAuthentication();
+            app.UseCors(builder =>
+           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+
             app.UseMvc();
-            app.UseCors("MyPolicy");
+            //app.UseCors("MyPolicy");
         }
     }
 }

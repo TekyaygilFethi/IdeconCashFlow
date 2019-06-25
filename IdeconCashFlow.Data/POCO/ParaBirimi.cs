@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdeconCashFlow.Data.POCO
 {
+    [Table("ParaBirimiTable")]
     public class ParaBirimi
     {
         public ParaBirimi()

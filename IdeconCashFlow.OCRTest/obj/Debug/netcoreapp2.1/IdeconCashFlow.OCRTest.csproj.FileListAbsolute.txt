@@ -1,0 +1,8 @@
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\bin\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.deps.json
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\bin\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.runtimeconfig.json
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\bin\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.runtimeconfig.dev.json
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\bin\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.dll
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\obj\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.csproj.CoreCompileInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\obj\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.AssemblyInfoInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\obj\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.AssemblyInfo.cs
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.OCRTest\obj\Debug\netcoreapp2.1\IdeconCashFlow.OCRTest.csprojAssemblyReference.cache

@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
+﻿using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
 using IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder;
-using IdeconCashFlow.Data.Business.GenericResponse;
 using IdeconCashFlow.Data.Business.KalemManagerFormDataFolder;
 using IdeconCashFlow.Data.POCO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Web.Http.Cors;
+using System.Linq;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -14,85 +12,80 @@ namespace IdeconCashFlow.Api.Controllers
 {
     [Route("api/Baslik")]
     [ApiController]
-    
+
     public class BaslikApiController : Controller
     {
         CashflowComplexManager cashflowManager;
+        UserManager userManager;
 
         public BaslikApiController()
         {
             cashflowManager = new CashflowComplexManager();
+            userManager = new UserManager();
         }
 
-        #region DUMMY
-        //[HttpGet, Route("DummyGetAllBasliklar")]
-        //public ResponseObject<GetBaslikFormData> DummyGetAllBasliklar()
-        //{
-        //    return cashflowManager.GetAllBaslikDummy();
-        //}
-
-        //[HttpGet, Route("DummyGetGelirBasliklar")]
-        //public ResponseObject<List<GetBaslikFormData>> DummyGetGelirBasliklar()
-        //{
-        //    return cashflowManager.GetGelirBaslikDummy();
-        //}
-
-        //[HttpGet, Route("DummyGetGiderBasliklar")]
-        //public ResponseObject<List<GetBaslikFormData>> DummyGetGiderBasliklar()
-        //{
-        //    return cashflowManager.GetGiderBaslikDummy();
-        //}
-        #endregion
-
-        // GET: api/<controller>
-        [HttpGet, Route("GetAllBasliklar")]
+        #region GET
+        [HttpGet, Route("GetAllBasliklarDapper")]
         [Authorize()]
         public IActionResult GetAllBasliklar()
         {
-            return Ok(cashflowManager.GetAllBasliklar());
+            return Ok(cashflowManager.GetAllBasliklarDapper());
         }
 
-        [HttpGet, Route("GetGelirBasliklar")]
-        public IActionResult GetGelirBasliklar()
-        {
-            return Ok(cashflowManager.GetGelirBaslik());
-        }
+        //[HttpGet, Route("GetGelirBasliklarDapper")]
+        //public IActionResult GetGelirBasliklar()
+        //{
+        //    return Ok(cashflowManager.GetGelirBaslikDapper());
+        //}
 
-        [HttpGet, Route("GetGiderBasliklar")]
-        public IActionResult GetGiderBasliklar()
-        {
-            return Ok(cashflowManager.GetGiderBaslik());
-        }
-
-        [HttpPost, Route("CreateKalem")]
-        public IActionResult CreateKalem([FromBody]AddKalemFormData kalemFormData)
-        {
-            return Ok(cashflowManager.AddKalem(kalemFormData));
-        }
-
-        [HttpGet,Route("GetAllAnaBasliklar")]
+        [HttpGet, Route("GetAllAnaBasliklarDapper")]
         public IActionResult GetAllAnaBasliklar()
         {
-            return Ok(cashflowManager.GetAllAnaBasliklar());
+            return Ok(cashflowManager.GetAllAnaBasliklarDapper());
         }
 
-        [HttpGet,Route("GetBasliklarWithDate")]
-        public IActionResult GetAllBasliklarWithDate(GetBaslikWithDateFormData gbwdFormData)
+        [HttpGet, Route("GetTotalParaBirimiTutarDapper")]
+        public IActionResult GetTotalParaBirimiTutar()
         {
-            return Ok(cashflowManager.GetAllBasliklarWithDate(gbwdFormData));
+            return Ok(cashflowManager.GetTotalParaBirimiTutarDapper());
         }
 
-        [HttpGet,Route("GetAllParaBirimleri")]
-        public IActionResult GetAllParaBirimleri()
+        [HttpGet, Route("GetTotalParaBirimiTutarOfBaslikDapper")]
+        public IActionResult GetTotalParaBirimiTutarOfBaslik(string baslikID)
         {
-            return Ok(cashflowManager.GetAllParaBirimi());
+            return Ok(cashflowManager.GetTotalParaBirimiTutarOfBaslikDapper(baslikID));
         }
 
-        [HttpPost, Route("CreateAnaBaslik")]
+        [HttpPost, Route("GetAllBasliklarWithDate")]
+        public IActionResult GetAllBasliklarWithDate(GetBaslikWithDateFormData form)
+        {
+            return Ok(cashflowManager.GetAllBasliklarWithDateDapper(form));
+        }
+        #endregion
+
+        #region CREATE
+        [HttpPost, Route("CreateKalem"), Authorize()]
+        public IActionResult CreateKalem([FromBody]AddKalemFormData kalemFormData)
+        {
+            var sirketKodu = User.Claims.First(x => x.Type == "SirketKodu").Value;
+            var ekleyenUserID = User.Claims.First(x => x.Type == "UserID").Value;
+
+            kalemFormData.SirketKodu = sirketKodu;
+            kalemFormData.EkleyenUserID = int.Parse(ekleyenUserID);
+
+            return Ok(cashflowManager.CreateKalemDapper(kalemFormData));
+        }
+
+        
+
+        [HttpPost, Route("CreateAnaBaslik"), Authorize()]
         public IActionResult CreateAnaBaslik([FromBody]AddAnaBaslikRequestObject requestObject)
         {
-            return Ok(cashflowManager.AddAnaBaslik(requestObject));
-        }
+            var sirketKodu = User.Claims.First(x => x.Type == "SirketKodu").Value;
+            requestObject.SirketKodu = sirketKodu;
 
+            return Ok(cashflowManager.CreateAnaBaslikDapper(requestObject));
+        }
+        #endregion
     }
 }

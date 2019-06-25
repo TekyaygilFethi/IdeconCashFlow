@@ -1,18 +1,24 @@
-﻿using IdeconCashFlow.Data.POCO;
-using System;
+﻿using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Text;
 
 namespace IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder
 {
     public class GetBaslikWithDateResponse
     {
-        public DateTime VadeTarihi { get; set; }
-        
-        public List<ParaBirimiTutar> ParaBirimiTutarlar { get; set; }
+        public GetBaslikWithDateResponse()
+        {
+            Details = new List<GetBaslikWithDateDetail>();
+            Totals = new List<GetBaslikWithDateTotals>();
+            //Contents = new List<GetBaslikWithDateContents>();
+        }
 
-        public string AnaBaslikID { get; set; }
+        [JsonProperty("Totals")]
+        public List<GetBaslikWithDateTotals> Totals { get; set; }
 
-        public string AnaBaslikAciklama { get; set; }
+        [JsonProperty("getDetail")]
+        public List<GetBaslikWithDateDetail> Details { get; set; }
+
+        //[JsonProperty("Contents")]
+        //public List<GetBaslikWithDateContents> Contents { get; set; }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
 using IdeconCashFlow.Data.Business.UserManagerFormDataFolder;
+using IdeconCashFlow.Data.POCO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -14,20 +16,21 @@ namespace IdeconCashFlow.Api.Controllers
     [ApiController]
     public class UserApiController : ControllerBase
     {
-        private readonly IConfiguration _config;
         CashflowComplexManager cashflowManager;
+        UserManager userManager;
 
-        public UserApiController(IConfiguration _config)
+        public UserApiController()
         {
-            cashflowManager = new CashflowComplexManager(true);
-            this._config = _config;
+            //cashflowManager = new CashflowComplexManager();
+            userManager = new UserManager();
         }
 
         [HttpPost]
         [Route("GetUserToken")]
+        [AllowAnonymous()]
         public IActionResult GetUserToken([FromBody]LoginFormData lgnForm)
         {
-            var response = cashflowManager.CheckUserCreedientals(lgnForm);
+            var response = userManager.CheckUserCreedientalsDapper(lgnForm);
             var user = response.Object;
 
             if (user != null)
@@ -38,6 +41,8 @@ namespace IdeconCashFlow.Api.Controllers
                     new Claim("Username", user.Username),
                     new Claim("Password",user.Password),
                     new Claim("SirketKodu",user.SirketKodu),
+                    new Claim("NameSurname",user.Name+" "+user.Surname),
+                    new Claim("UserID",user.ID.ToString()),
                     new Claim("Rol",user.Yetki)
                     };
 
@@ -62,5 +67,11 @@ namespace IdeconCashFlow.Api.Controllers
                 return Unauthorized();
         }
 
+
+        [HttpPost, Route("CreateUser"), AllowAnonymous]
+        public IActionResult CreateUser([FromBody]User user)
+        {
+            return Ok(userManager.CreateUser(user));
+        }
     }
 }

@@ -64,3 +64,5 @@ C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCas
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.DummyInsert\obj\Debug\netcoreapp2.2\IdeconCashFlow.DummyInsert.pdb
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.DummyInsert\bin\Debug\netcoreapp2.2\IdeconCashFlow.Helper.dll
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.DummyInsert\bin\Debug\netcoreapp2.2\IdeconCashFlow.Helper.pdb
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.DummyInsert\bin\Debug\netcoreapp2.2\IdeconCashFlow.Business.dll
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.DummyInsert\bin\Debug\netcoreapp2.2\IdeconCashFlow.Business.pdb

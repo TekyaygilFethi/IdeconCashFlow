@@ -33,3 +33,4 @@ C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCas
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Helper\obj\Debug\netcoreapp2.2\IdeconCashFlow.Helper.AssemblyInfo.cs
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Helper\obj\Debug\netcoreapp2.2\IdeconCashFlow.Helper.dll
 C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Helper\obj\Debug\netcoreapp2.2\IdeconCashFlow.Helper.pdb
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Helper\obj\Debug\netcoreapp2.2\IdeconCashFlow.Helper.csprojAssemblyReference.cache

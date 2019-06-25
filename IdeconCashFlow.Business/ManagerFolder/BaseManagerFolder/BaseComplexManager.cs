@@ -1,6 +1,4 @@
 ﻿using AutoMapper;
-using IdeconCashFlow.Business.ExceptionFolder;
-using System;
 using System.Collections.Generic;
 
 namespace IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder
@@ -30,6 +28,7 @@ namespace IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder
 
             IMapper mapper = config.CreateMapper();
             return mapper.Map<TSource, TDestination>(src);
+
         }
     }
 }

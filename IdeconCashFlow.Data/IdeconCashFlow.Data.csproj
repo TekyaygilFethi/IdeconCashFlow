@@ -5,16 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Business\BaslikManagerFormDataFolder\KalemlerGroupByDateResponse.cs" />
-    <Compile Remove="Business\BaslikManagerFormDataFolder\ParaBirimiToplamTutar.cs" />
+    <None Include="POCO\AnaBaslik.cs" />
+    <None Include="POCO\BasePOCO.cs" />
+    <None Include="POCO\BaslikBasePOCO.cs" />
+    <None Include="POCO\Kalem.cs" />
+    <None Include="POCO\ParaBirimi.cs" />
+    <None Include="POCO\ParaBirimiKalem.cs" />
+    <None Include="POCO\ParaBirimiTutar.cs" />
+    <None Include="POCO\TekliBaslik.cs" />
+    <None Include="POCO\User.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Business\BaslikManagerFormDataFolder\KalemlerGroupByDateResponse.cs" />
-    <None Include="Business\BaslikManagerFormDataFolder\ParaBirimiToplamTutar.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="Dapper" Version="1.60.6" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
