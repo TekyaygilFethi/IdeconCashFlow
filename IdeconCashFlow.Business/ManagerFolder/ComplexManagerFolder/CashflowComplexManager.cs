@@ -438,7 +438,7 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
                             gbwdc.CurrencyDates.Add(gbwcd);
                         }
 
-                        gbwdc.CurrencyDates.SingleOrDefault(w => w.DateIndicator.CompareTo(new DateTime().AddDays(kalemQueryResponse.DateIndicator)) == 0).Tutar += kalemQueryResponse.Total;
+                        gbwdc.CurrencyDates.SingleOrDefault(w => w.VadeTarihi.ToShortDateString().Equals(kalemQueryResponse.VadeTarihi.ToShortDateString())).Tutar += kalemQueryResponse.Total;
 
                         gbwdd.Contents.Add(gbwdc);
                         #endregion
