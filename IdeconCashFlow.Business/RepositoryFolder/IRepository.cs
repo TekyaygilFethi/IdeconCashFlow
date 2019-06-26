@@ -8,13 +8,12 @@ namespace IdeconCashFlow.Business.RepositoryFolder
 {
     public interface IRepository<T> where T : class
     {
-        void Add(T item);
-        void Delete(T item);
+        ResponseObject<T> Add(T item);
+        ResponseObject<string> Delete(T item);
         T GetByID(int ID);
         List<T> GetAll();
         List<T> GetBy(Expression<Func<T, bool>> predicate);
         T SingleGetBy(Expression<Func<T, bool>> predicate);
         DbSet<T> GetDbSet();
-        bool Any(Func<T,bool> predicate);
     }
 }

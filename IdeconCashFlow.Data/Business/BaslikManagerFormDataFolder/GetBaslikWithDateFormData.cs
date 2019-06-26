@@ -8,7 +8,7 @@ namespace IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder
     {
         public DateTime BaslangicTarihi { get; set; }
 
-        public string AnaBaslikID { get; set; } = "all";
+        public string AnaBaslikID { get; set; }
 
         public string FilterType { get; set; }
     }

@@ -6,6 +6,11 @@ namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder
 {
     public class KalemManager : BasePrimitiveManager<Kalem>
     {
-        public KalemManager(IRepository<Kalem> repo) : base(repo) { }
+        private readonly IRepository<Kalem> kalemRepository;
+
+        public KalemManager(IRepository<Kalem> repo) : base(repo)
+        {
+            kalemRepository = base.repository;
+        }
     }
 }

@@ -1,12 +1,14 @@
-﻿using IdeconCashFlow.Business.ExceptionFolder;
-using IdeconCashFlow.Business.RepositoryFolder;
+﻿using IdeconCashFlow.Business.RepositoryFolder;
+using IdeconCashFlow.Data.Business.GenericResponse;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Text;
 
 namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder.BasePrimitiveManagerFolder
 {
-    public class BasePrimitiveManager<T> : IBasePrimitiveManager<T> where T : class
+    public class BasePrimitiveManager<T> :IRepository<T> where T:class
     {
         protected readonly IRepository<T> repository;
 
@@ -15,188 +17,39 @@ namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder.BasePrimi
             repository = repo;
         }
 
-        //public string GetExceptionMessage(Exception ex)
-        //{
-        //    return ExceptionOps.GetExceptionMessage(ex);
-        //}
-
-        public void Add(T item)
+        public ResponseObject<T> Add(T item)
         {
-            try
-            {
-                repository.Add(item);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return repository.Add(item);
         }
 
-        public void Delete(T item)
+        public ResponseObject<string> Delete(T item)
         {
-            try
-            {
-                repository.Delete(item);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return repository.Delete(item);
+        }
+
+        public T GetByID(int ID)
+        {
+            return repository.GetByID(ID);
         }
 
         public List<T> GetAll()
         {
-            try
-            {
-                return repository.GetAll();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return repository.GetAll();
         }
 
         public List<T> GetBy(Expression<Func<T, bool>> predicate)
         {
-            try
-            {
-                return repository.GetBy(predicate);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return repository.GetBy(predicate);
         }
 
         public T SingleGetBy(Expression<Func<T, bool>> predicate)
         {
-            try
-            {
-                return repository.SingleGetBy(predicate);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return repository.SingleGetBy(predicate);
         }
-
-        //public ResponseObject<T> Add(T item)
-        //{
-        //    ResponseObject<T> response = new ResponseObject<T>();
-        //    try
-        //    {
-        //        repository.Add(item);
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = item;
-        //        response.Explanation = "Success";
-        //    }catch(Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseObject<T> GetByID(int ID)
-        //{
-        //    ResponseObject<T> response = new ResponseObject<T>();
-        //    try
-        //    {
-        //        var item=repository.GetByID(ID);
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = item;
-        //        response.Explanation = "Success";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseObject<List<T>> GetAll()
-        //{
-        //    ResponseObject<List<T>> response = new ResponseObject<List<T>>();
-        //    try
-        //    {
-        //        var list = repository.GetAll();
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = list;
-        //        response.Explanation = "Success";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseObject<List<T>> GetBy(Expression<Func<T, bool>> predicate)
-        //{
-        //    ResponseObject<List<T>> response = new ResponseObject<List<T>>();
-        //    try
-        //    {
-        //        var list = repository.GetBy(predicate);
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = list;
-        //        response.Explanation = "Success";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseObject<T> SingleGetBy(Expression<Func<T, bool>> predicate)
-        //{
-        //    ResponseObject<T> response = new ResponseObject<T>();
-        //    try
-        //    {
-        //        var item = repository.SingleGetBy(predicate);
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = item;
-        //        response.Explanation = "Success";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseObject<string> Delete(T item)
-        //{
-        //    ResponseObject<string> response = new ResponseObject<string>();
-        //    try
-        //    {
-        //        repository.Delete(item);
-        //        response.IsSuccess = true;
-        //        response.StatusCode = "200";
-        //        response.Object = "Silindi!";
-        //        response.Explanation = "Success";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = ExceptionOps.GetExceptionMessage(ex);
-        //    }
-        //    return response;
-        //}
+        
+        public DbSet<T> GetDbSet()
+        {
+            return repository.GetDbSet();
+        }
     }
 }

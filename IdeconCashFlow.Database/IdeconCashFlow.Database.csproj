@@ -5,34 +5,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="EFSQLFolder\IQueryableExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="EFSQLFolder\IQueryableExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.4" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\IdeconCashFlow.Data\IdeconCashFlow.Data.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="System">
-      <HintPath>System</HintPath>
-    </Reference>
-    <Reference Include="System.Data">
-      <HintPath>System.Data</HintPath>
-    </Reference>
-    <Reference Include="System.Xml">
-      <HintPath>System.Xml</HintPath>
-    </Reference>
   </ItemGroup>
 
 </Project>

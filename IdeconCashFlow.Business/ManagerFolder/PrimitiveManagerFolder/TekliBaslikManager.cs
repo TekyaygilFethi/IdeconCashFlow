@@ -1,37 +1,35 @@
 ﻿using IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder.BasePrimitiveManagerFolder;
 using IdeconCashFlow.Business.RepositoryFolder;
 using IdeconCashFlow.Data.POCO;
-using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
 
 namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder
 {
     public class TekliBaslikManager : BasePrimitiveManager<TekliBaslik>
     {
-        public TekliBaslikManager(IRepository<TekliBaslik> repo) : base(repo) { }
+        private readonly IRepository<TekliBaslik> tekliBaslikRepository;
 
+        public TekliBaslikManager(IRepository<TekliBaslik> repo) : base(repo)
+        {
+            tekliBaslikRepository = base.repository;
+        }
         public bool DoesExists(string AnaBaslikID)
         {
-            return base.repository.Any(w => w.AnaBaslikID == AnaBaslikID);
+            return tekliBaslikRepository.GetBy(w => w.AnaBaslikID== AnaBaslikID) != null;
         }
 
         public TekliBaslik SingleGetByAnaBaslik(string AnaBaslikID)
         {
-            return base.repository.SingleGetBy(w => w.AnaBaslikID == AnaBaslikID);
+            return tekliBaslikRepository.SingleGetBy(w => w.AnaBaslikID == AnaBaslikID);
         }
-
-        //public new List<TekliBaslik> GetAll()
-        //{
-        //    try
-        //    {
-        //        return base.repository.GetAll();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //    //return GetDbSet().Include(i => i.AnaBaslik).Include(i => i.Kalemler).ToList();
-        //}
+        
+        public List<TekliBaslik> GetAll()
+        {
+            return GetDbSet().Include(i => i.AnaBaslik).Include(i => i.Kalemler).ToList();
+        }
 
     }
 }

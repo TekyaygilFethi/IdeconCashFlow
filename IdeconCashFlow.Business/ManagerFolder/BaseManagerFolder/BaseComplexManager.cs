@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using IdeconCashFlow.Business.ExceptionFolder;
+using System;
 using System.Collections.Generic;
 
 namespace IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder
@@ -7,10 +9,10 @@ namespace IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder
     {
         protected BaseComplexManager() { }
 
-        //public string GetExceptionMessage(Exception ex)
-        //{
-        //    return ExceptionOps.GetExceptionMessage(ex);
-        //}
+        public string GetExceptionMessage(Exception ex)
+        {
+            return ExceptionOps.GetExceptionMessage(ex);
+        }
 
         public TDestination AdvancedMap<TSource, TDestination>(TSource src, List<string> propertyNames = null) where TDestination : class where TSource : class
         {
@@ -28,7 +30,6 @@ namespace IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder
 
             IMapper mapper = config.CreateMapper();
             return mapper.Map<TSource, TDestination>(src);
-
         }
     }
 }

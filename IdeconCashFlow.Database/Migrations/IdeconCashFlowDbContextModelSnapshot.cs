@@ -196,8 +196,6 @@ namespace IdeconCashFlow.Database.Migrations
                         .IsRequired()
                         .HasColumnName("Şifre");
 
-                    b.Property<string>("SirketKodu");
-
                     b.Property<string>("Surname");
 
                     b.Property<string>("Username")

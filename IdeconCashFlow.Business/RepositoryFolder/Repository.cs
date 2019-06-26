@@ -1,4 +1,5 @@
 ﻿using IdeconCashFlow.Business.ExceptionFolder;
+using IdeconCashFlow.Data.Business.GenericResponse;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,106 +17,62 @@ namespace IdeconCashFlow.Business.RepositoryFolder
             this.db = db;
         }
 
-        private static string GetExceptionMessage(Exception ex)
+        public ResponseObject<T> Add(T item)
         {
-            return ExceptionOps.GetExceptionMessage(ex);
-        }
-
-        public void Add(T item)
-        {
+            ResponseObject<T> response = new ResponseObject<T>();
             try
             {
                 db.Set<T>().Add(item);
+                response.IsSuccess = true;
+                response.Object = item;
             }
             catch (Exception ex)
             {
-                throw new Exception(GetExceptionMessage(ex));
+                response.IsSuccess = false;
+                response.Explanation = ExceptionOps.GetExceptionMessage(ex);
             }
+            return response;
         }
-
-        public void Delete(T item)
+        
+        public ResponseObject<string> Delete(T item)
         {
+            ResponseObject<string> response = new ResponseObject<string>();
             try
             {
                 db.Set<T>().Remove(item);
+                response.IsSuccess = true;
             }
             catch (Exception ex)
             {
-                throw new Exception(ex.Message);
+                response.IsSuccess = false;
+                response.Explanation = ExceptionOps.GetExceptionMessage(ex);
             }
+            return response;            
         }
 
         public List<T> GetAll()
         {
-            try
-            {
-                return db.Set<T>().ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }
+            return db.Set<T>().ToList();
         }
 
         public List<T> GetBy(Expression<Func<T, bool>> predicate)
         {
-            try
-            {
-                return db.Set<T>().Where(predicate).ToList();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }
+            return db.Set<T>().Where(predicate).ToList();
         }
 
         public T GetByID(int ID)
         {
-            try
-            {
-                return db.Set<T>().Find(ID);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }            
+            return db.Set<T>().Find(ID);
         }
 
         public T SingleGetBy(Expression<Func<T, bool>> predicate)
         {
-            try
-            {
-                return db.Set<T>().SingleOrDefault(predicate);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }
-            
-        }
-
-        public bool Any(Func<T, bool> predicate)
-        {
-            try
-            {
-                return db.Set<T>().Any(predicate);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }
+            return db.Set<T>().SingleOrDefault(predicate);
         }
 
         public DbSet<T> GetDbSet()
         {
-            try
-            {
-                return db.Set<T>();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(GetExceptionMessage(ex));
-            }
+            return db.Set<T>();
         }
     }
 }

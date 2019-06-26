@@ -11,10 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\IdeconCashFlow.Business\IdeconCashFlow.Business.csproj" />
     <ProjectReference Include="..\IdeconCashFlow.Database\IdeconCashFlow.Database.csproj" />
     <ProjectReference Include="..\IdeconCashFlow.Data\IdeconCashFlow.Data.csproj" />
-    <ProjectReference Include="..\IdeconCashFlow.Helper\IdeconCashFlow.Helper.csproj" />
   </ItemGroup>
 
 </Project>

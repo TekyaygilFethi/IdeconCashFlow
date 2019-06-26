@@ -1,37 +1,30 @@
 ﻿using IdeconCashFlow.Business.RepositoryFolder;
 using IdeconCashFlow.Data.POCO;
-using System;
 
 namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder
 {
     public class AnaBaslikManager : BasePrimitiveManagerFolder.BasePrimitiveManager<AnaBaslik>
     {
-        //private readonly IRepository<AnaBaslik> anaBaslikRepository;
+        private readonly IRepository<AnaBaslik> anaBaslikRepository;
 
-        public AnaBaslikManager(IRepository<AnaBaslik> repo) : base(repo) { }
+        public AnaBaslikManager(IRepository<AnaBaslik> repo) : base(repo)
+        {
+            anaBaslikRepository = repo;
+        }
 
         public AnaBaslik SingleGetBy(string ID)
         {
-            try
-            {
-                return repository.SingleGetBy(w => w.ID == ID);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return anaBaslikRepository.SingleGetBy(w => w.ID == ID);
+        }
+
+        public bool DoesExists(string ID)
+        {
+            return anaBaslikRepository.GetBy(w => w.ID == ID) != null;
         }
 
         public AnaBaslik GetByID(string ID)
         {
-            try
-            {
-                return repository.SingleGetBy(w => w.ID == ID);
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return anaBaslikRepository.SingleGetBy(w => w.ID == ID);
         }
 
 

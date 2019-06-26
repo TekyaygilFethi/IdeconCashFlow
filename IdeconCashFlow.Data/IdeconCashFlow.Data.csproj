@@ -5,19 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="POCO\AnaBaslik.cs" />
-    <None Include="POCO\BasePOCO.cs" />
-    <None Include="POCO\BaslikBasePOCO.cs" />
-    <None Include="POCO\Kalem.cs" />
-    <None Include="POCO\ParaBirimi.cs" />
-    <None Include="POCO\ParaBirimiKalem.cs" />
-    <None Include="POCO\ParaBirimiTutar.cs" />
-    <None Include="POCO\TekliBaslik.cs" />
-    <None Include="POCO\User.cs" />
+    <Compile Remove="Business\BaslikManagerFormDataFolder\TekliBaslik.cs" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Dapper" Version="1.60.6" />
+    <None Include="Business\BaslikManagerFormDataFolder\TekliBaslik.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.4" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />

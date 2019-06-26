@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdeconCashFlow.Data.POCO
 {
-    [Table("TekliBaslikTable")]
     public class TekliBaslik
     {
         public TekliBaslik()
@@ -16,7 +15,6 @@ namespace IdeconCashFlow.Data.POCO
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         [JsonProperty("id")]
-        [ForeignKey("AnaBaslik")]
         public string ID { get; set; }
 
         [JsonProperty("flowDirectionSymbol")]
@@ -34,7 +32,10 @@ namespace IdeconCashFlow.Data.POCO
         [JsonIgnore]
         public virtual List<Kalem> Kalemler { get; set; }
 
-        [JsonIgnore]
+        [ForeignKey("AnaBaslikID"), JsonIgnore]
         public virtual AnaBaslik AnaBaslik { get; set; }
+
+        [JsonIgnore]
+        public string AnaBaslikID { get; set; }
     }
 }

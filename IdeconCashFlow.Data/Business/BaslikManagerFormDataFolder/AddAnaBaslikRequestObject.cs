@@ -12,8 +12,5 @@ namespace IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder
 
         [JsonProperty("isVadeIliskili")]
         public bool IsVadeIliskili { get; set; }
-
-        [JsonProperty("sirketKodu")]
-        public string SirketKodu { get; set; }
     }
 }

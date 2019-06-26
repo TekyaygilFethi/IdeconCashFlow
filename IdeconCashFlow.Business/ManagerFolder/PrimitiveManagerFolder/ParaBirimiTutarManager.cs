@@ -5,6 +5,11 @@ namespace IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder
 {
     public class ParaBirimiTutarManager : BasePrimitiveManagerFolder.BasePrimitiveManager<ParaBirimiTutar>
     {
-        public ParaBirimiTutarManager(IRepository<ParaBirimiTutar> repo) : base(repo) { }
+        private readonly IRepository<ParaBirimiTutar> paraBirimiTutarRepository;
+
+        public ParaBirimiTutarManager(IRepository<ParaBirimiTutar> repo) : base(repo)
+        {
+            paraBirimiTutarRepository = repo;
+        }
     }
 }

@@ -4,16 +4,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdeconCashFlow.Data.POCO
 {
-    [Table("ParaBirimiKalemTable")]
     public class ParaBirimiKalem
     {
-        [Key,JsonIgnore,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key,ForeignKey("Kalem"),JsonIgnore]
         public string ID { get; set; }
 
-        [JsonIgnore, ForeignKey("KalemID")]
+        [JsonIgnore]
         public virtual Kalem Kalem { get; set; }
-        
-        public string KalemID { get; set; }
 
         [ForeignKey("ParaBirimiID"),JsonProperty("currency")]
         public virtual ParaBirimi ParaBirimi { get; set; }

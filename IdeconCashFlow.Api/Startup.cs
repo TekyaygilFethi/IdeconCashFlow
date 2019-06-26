@@ -1,20 +1,10 @@
-﻿using IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder;
-using IdeconCashFlow.Data.Business.UserManagerFormDataFolder;
-using IdeconCashFlow.Helper;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using IdeconCashFlow.Helper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.Swagger;
-using System;
-using System.Diagnostics;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IdeconCashFlow.Api
 {
@@ -36,57 +26,6 @@ namespace IdeconCashFlow.Api
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-
-            IdentityModelEventSource.ShowPII = true;
-
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateAudience = true,
-                    ValidAudience = "ideconclients",
-                    ValidateIssuer = true,
-                    ValidIssuer = "idecon.com.tr",
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes("IDECON1*Pwd is the secret key of this cashflow program"))
-                };
-
-                options.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = ctx =>
-                    {
-                        //CashflowComplexManager complexManager = new CashflowComplexManager(true);
-
-                        var principal = ctx.Principal;//Gerekirse burada gelen token içerisindeki çeşitli bilgilere göre doğrulam yapılabilir.
-                        var identity = (ClaimsIdentity)principal.Identity;
-                        //string username = identity.FindFirst("Username").Value;
-                        //string password = identity.FindFirst("Password").Value;
-                        //string sirketKodu = identity.FindFirst("SirketKodu").Value;
-
-                        //var authorizeResult = complexManager.CheckUserCreedientalsByJWT(new UserJWT { Username = username, Password = password, SirketKodu = sirketKodu });
-
-                        //if(!(authorizeResult.IsSuccess))
-                        //{
-                            
-                        //}
-
-                        return Task.CompletedTask;
-                    },
-                    OnAuthenticationFailed = ctx =>
-                    {
-                        Debug.WriteLine("Exception:{0}", ctx.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            });
-
 
             services.AddSwaggerGen(c =>
             {
@@ -113,7 +52,6 @@ namespace IdeconCashFlow.Api
             });
         }
 
-
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -126,7 +64,7 @@ namespace IdeconCashFlow.Api
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            //app.UseCorsMiddleware();
+            app.UseCorsMiddleware();
             app.UseSwagger()
             .UseSwaggerUI(c =>
             {
@@ -138,12 +76,10 @@ namespace IdeconCashFlow.Api
             });
 
             app.UseHttpsRedirection();
-            app.UseAuthentication();
-            app.UseCors(builder =>
-           builder.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
-
             app.UseMvc();
-            //app.UseCors("MyPolicy");
+            app.UseCors("MyPolicy");
+
+
         }
     }
 }

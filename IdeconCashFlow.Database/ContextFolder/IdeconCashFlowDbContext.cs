@@ -1,16 +1,10 @@
 ﻿using IdeconCashFlow.Data.POCO;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace IdeconCashFlow.Database.ContextFolder
 {
-  
     public class IdeconCashFlowDbContext : DbContext
     {
-        public static ILoggerFactory LoggerFactory { get; } = new LoggerFactory(new[] {
-              new ConsoleLoggerProvider((_, __) => true, true)
-        });
         public IdeconCashFlowDbContext() : base()
         {
 
@@ -28,8 +22,6 @@ namespace IdeconCashFlow.Database.ContextFolder
         public DbSet<ParaBirimiKalem> ParaBirimiKalemler { get; set; }
         public DbSet<TekliBaslik> TekliBasliklar { get; set; }
         public DbSet<ParaBirimiTutar> ParaBirimiTutarlar { get; set; }
-
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -55,11 +47,11 @@ namespace IdeconCashFlow.Database.ContextFolder
             modelBuilder.Entity<Kalem>()
                 .HasOne(m => m.ParaBirimiKalem)
                 .WithOne(o => o.Kalem)
-                .HasForeignKey<Kalem>(fk => fk.ParaBirimiKalemID)
-                .HasPrincipalKey<ParaBirimiKalem>(pk => pk.ID)
+                .HasForeignKey<Kalem>(fk=>fk.ParaBirimiKalemID)
+                .HasPrincipalKey<ParaBirimiKalem>(pk=>pk.ID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
+            
             #endregion
 
             #region ParaBirimi FLUENT API
@@ -92,20 +84,19 @@ namespace IdeconCashFlow.Database.ContextFolder
             modelBuilder.Entity<TekliBaslik>()
                 .HasOne(m => m.AnaBaslik)
                 .WithOne(o => o.TekliBaslik)
-                .HasForeignKey<AnaBaslik>(fk => fk.ID)
-                .HasPrincipalKey<TekliBaslik>(fk => fk.ID)
+                .HasForeignKey<AnaBaslik>(fk=>fk.TekliBaslikID)
+                .HasPrincipalKey<TekliBaslik>(fk=>fk.AnaBaslikID)
                 .OnDelete(DeleteBehavior.Restrict);
             #endregion
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=IdeconCashFlowDatabase;Integrated Security=True");
-            builder.UseLoggerFactory(LoggerFactory)  //tie-up DbContext with LoggerFactory object
-            .EnableSensitiveDataLogging();
-            //builder.UseSqlServer(@"Server=4d296a8c-776a-40ed-8de9-aa5e00cb3b8b.sqlserver.sequelizer.com;Database=db4d296a8c776a40ed8de9aa5e00cb3b8b;User ID=tralejihdnhczgks;Password=FcUeNvojhJi4JtYFLZQ2ePxYtYFAvrWrQt436FjxzXtHozQWPSBeFEPZM5TXWUVY;");
+            //builder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=IdeconCashFlowDatabase;Integrated Security=True");
+            builder.UseSqlServer(@"Server=4d296a8c-776a-40ed-8de9-aa5e00cb3b8b.sqlserver.sequelizer.com;Database=db4d296a8c776a40ed8de9aa5e00cb3b8b;User ID=tralejihdnhczgks;Password=FcUeNvojhJi4JtYFLZQ2ePxYtYFAvrWrQt436FjxzXtHozQWPSBeFEPZM5TXWUVY;");
             builder.UseLazyLoadingProxies();
             base.OnConfiguring(builder);
         }
+
     }
 }
