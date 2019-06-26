@@ -10,14 +10,14 @@ namespace IdeconCashFlow.Data.POCO
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string KalemID { get; set; }
+        public string ID { get; set; }
 
         #region Tarihler
         public DateTime FaturaTarihi { get; set; }
-
+        
         public DateTime VadeTarihi { get; set; }
 
-        public DateTime? DuzenlemeTarihi { get; set; }
+        public DateTime DuzenlemeTarihi { get; set; }
 
         public DateTime EklemeTarihi { get; set; }
         #endregion

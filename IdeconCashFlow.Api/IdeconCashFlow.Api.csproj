@@ -2,15 +2,42 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <!--<AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>-->
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
 <PublishDir>$(OutDir)_PublishedWebsites\NetCoreWebApp\</PublishDir>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="%2a%2a\**" />
+    <Content Remove="%2a%2a\**" />
+    <EmbeddedResource Remove="%2a%2a\**" />
+    <None Remove="%2a%2a\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Filters\IdeconAuthorizationAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="%2a%2a\%2a.config" />
+    <Content Remove="%2a%2a\%2a.cshtml" />
+    <Content Remove="%2a%2a\%2a.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="%2a%2a/%2a.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Filters\IdeconAuthorizationAttribute.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FakeData" Version="1.0.0" />
+    <PackageReference Include="FTH.Extension" Version="1.0.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Cors" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 

@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.2": {
+      "BouncyCastle.NetCore/1.8.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/2.2.0": {
         "type": "package",
         "compile": {
@@ -542,6 +551,30 @@
     }
   },
   "libraries": {
+    "BouncyCastle.NetCore/1.8.5": {
+      "sha512": "tEEZQa/7t1vXD0p3Xv79M8XyxA7iMIa8VjADV3zMWfdpOAfyJYIwhbRd9puz/CXJeZl3vddVo72yf+qxH0iyxA==",
+      "type": "package",
+      "path": "bouncycastle.netcore/1.8.5",
+      "files": [
+        ".signature.p7s",
+        "bouncycastle.netcore.1.8.5.nupkg.sha512",
+        "bouncycastle.netcore.nuspec",
+        "lib/Mono/BouncyCastle.Crypto.dll",
+        "lib/Mono/BouncyCastle.Crypto.xml",
+        "lib/MonoAndroid/BouncyCastle.Crypto.dll",
+        "lib/MonoAndroid/BouncyCastle.Crypto.xml",
+        "lib/MonoMac/BouncyCastle.Crypto.dll",
+        "lib/MonoMac/BouncyCastle.Crypto.xml",
+        "lib/MonoTouch/BouncyCastle.Crypto.dll",
+        "lib/MonoTouch/BouncyCastle.Crypto.xml",
+        "lib/net20/BouncyCastle.Crypto.dll",
+        "lib/net20/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "lib/xamarinios/BouncyCastle.Crypto.dll",
+        "lib/xamarinios/BouncyCastle.Crypto.xml"
+      ]
+    },
     "Microsoft.AspNetCore.Cryptography.Internal/2.2.0": {
       "sha512": "hh/2QUBSikiZvpJUl2OkhRG+dS4p6ata+/Y/eUrXEVd/vmXSTrq4DbW1fb6SVBXhBhwQzHwrdBzcN0sUqO844w==",
       "type": "package",
@@ -1120,6 +1153,7 @@
       "type": "package",
       "path": "microsoft.netcore.targets/2.0.0",
       "files": [
+        ".nupkg.metadata",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
@@ -1135,6 +1169,7 @@
       "type": "package",
       "path": "netstandard.library/2.0.3",
       "files": [
+        ".nupkg.metadata",
         "LICENSE.TXT",
         "THIRD-PARTY-NOTICES.TXT",
         "build/netstandard2.0/NETStandard.Library.targets",
@@ -1440,6 +1475,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.2": [
+      "BouncyCastle.NetCore >= 1.8.5",
       "Microsoft.AspNetCore.Cryptography.KeyDerivation >= 2.2.0",
       "Microsoft.NETCore.App >= 2.2.0-preview3-27014-02",
       "NLog.Web.AspNetCore >= 4.8.2"
@@ -1452,11 +1488,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashFlow\\IdeconCashFlow.Helper\\IdeconCashFlow.Helper.csproj",
+      "projectUniqueName": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashflowLAST\\IdeconCashFlow-master\\IdeconCashFlow.Helper\\IdeconCashFlow.Helper.csproj",
       "projectName": "IdeconCashFlow.Helper",
-      "projectPath": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashFlow\\IdeconCashFlow.Helper\\IdeconCashFlow.Helper.csproj",
+      "projectPath": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashflowLAST\\IdeconCashFlow-master\\IdeconCashFlow.Helper\\IdeconCashFlow.Helper.csproj",
       "packagesPath": "C:\\Users\\IDECON5\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashFlow\\IdeconCashFlow.Helper\\obj\\",
+      "outputPath": "C:\\Users\\IDECON5\\source\\repos\\IdeconCashflowLAST\\IdeconCashFlow-master\\IdeconCashFlow.Helper\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1488,6 +1524,10 @@
     "frameworks": {
       "netcoreapp2.2": {
         "dependencies": {
+          "BouncyCastle.NetCore": {
+            "target": "Package",
+            "version": "[1.8.5, )"
+          },
           "Microsoft.AspNetCore.Cryptography.KeyDerivation": {
             "target": "Package",
             "version": "[2.2.0, )"

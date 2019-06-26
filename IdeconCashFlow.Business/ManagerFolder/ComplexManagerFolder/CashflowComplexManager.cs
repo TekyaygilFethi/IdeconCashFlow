@@ -1,332 +1,107 @@
-﻿using IdeconCashFlow.Business.DummyFolder;
-using IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder;
-using IdeconCashFlow.Business.ManagerFolder.PrimitiveManagerFolder;
-using IdeconCashFlow.Business.UnitOfWorkFolder;
+﻿using IdeconCashFlow.Business.ManagerFolder.BaseManagerFolder;
+using IdeconCashFlow.Business.RepositoryFolder.DapperFolder;
 using IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder;
 using IdeconCashFlow.Data.Business.GenericResponse;
 using IdeconCashFlow.Data.Business.KalemManagerFormDataFolder;
+using IdeconCashFlow.Data.Business.ParaBirimiTutarFormDataFolder;
 using IdeconCashFlow.Data.POCO;
-using IdeconCashFlow.Database.ContextFolder;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
+using System.Net.Http;
 
 namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
 {
     public class CashflowComplexManager : BaseComplexManager
     {
-        IUnitOfWork uow;
-
-        readonly KalemManager kalemManager;
-        readonly AnaBaslikManager anaBaslikManager;
-        readonly ParaBirimiManager paraBirimiManager;
-        readonly TekliBaslikManager tekliBaslikManager;
-        readonly ParaBirimiTutarManager paraBirimiTutarManager;
-        readonly ParaBirimiKalemManager paraBirimiKalemManager;
-        readonly UserManager userManager;
-        readonly DummyData dummyData;
+        readonly DapperRepository dapperRepository;
 
         public CashflowComplexManager()
         {
-            uow = new UnitOfWork(new IdeconCashFlowDbContext());
-
-            kalemManager = uow.GetManager<KalemManager, Kalem>();
-            anaBaslikManager = uow.GetManager<AnaBaslikManager, AnaBaslik>();
-            paraBirimiManager = uow.GetManager<ParaBirimiManager, ParaBirimi>();
-            tekliBaslikManager = uow.GetManager<TekliBaslikManager, TekliBaslik>();
-            paraBirimiTutarManager = uow.GetManager<ParaBirimiTutarManager, ParaBirimiTutar>();
-            paraBirimiKalemManager = uow.GetManager<ParaBirimiKalemManager, ParaBirimiKalem>();
-            userManager = uow.GetManager<UserManager, User>();
-            dummyData = new DummyData();
-
+            dapperRepository = new DapperRepository();
         }
 
-        #region DUMMY 
-        //public ResponseObject<GetBaslikFormData> GetAllBaslikDummy()
-        //{
-        //    ResponseObject<GetBaslikFormData> response = new ResponseObject<GetBaslikFormData>();
-        //    GetBaslikFormData gbFormData = new GetBaslikFormData();
-        //    dummyData.CreateData();
-        //    List<TekliBaslik> baslikList = new List<TekliBaslik>();
-
-        //    List<Kalem> kalemList = dummyData.GetKalems();
-        //    List<string> pbkKurList = kalemList.Select(s => s.ParaBirimiKalem.ParaBirimi.Kur).Distinct().ToList();
-        //    List<ParaBirimiTutar> pbtList = new List<ParaBirimiTutar>();
-
-
-        //    for (int i = 0; i < pbkKurList.Count; i++)
-        //    {
-        //        pbtList.Add(new ParaBirimiTutar { ParaBirimi = pbkKurList[i], Tutar = 0 });
-        //    }
-
-        //    try
-        //    {
-        //        foreach (var grup in kalemList.GroupBy(g => g.AnaBaslikID))
-        //        {
-
-        //            TekliBaslik baslik = new TekliBaslik();
-
-        //            foreach (var pbt in pbtList)
-        //            {
-        //                baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = pbt.ParaBirimi, Tutar = 0 });
-        //            }
-        //            foreach (var kalem in grup)
-        //            {
-        //                baslik.ID = kalem.AnaBaslikID;
-        //                baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-        //                baslik.FlowDirectionSymbol = kalem.KalemTipiAciklama == "Gelir" ? "+" : "-";
-        //                baslik.Title = kalem.AnaBaslik.BaslikTanimi;
-
-        //                pbtList.SingleOrDefault(w => w.ParaBirimi == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar += kalem.Tutar;
-        //                baslik.Currencies.SingleOrDefault(w => w.ParaBirimi == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar += kalem.Tutar;
-
-        //            }
-        //            baslikList.Add(baslik);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = base.GetExceptionMessage(ex);
-        //    }
-        //    gbFormData.Basliklar = baslikList;
-        //    gbFormData.TotalParaBirimiTutar = pbtList;
-
-        //    response.StatusCode = "200";
-        //    response.Explanation = "Success";
-        //    response.IsSuccess = true;
-        //    response.Object = gbFormData;
-        //    return response;
-        //}
-
-        //public ResponseObject<List<GetBaslikFormData>> GetGiderBaslikDummy()
-        //{
-        //    ResponseObject<List<GetBaslikFormData>> response = new ResponseObject<List<GetBaslikFormData>>();
-
-        //    try
-        //    {
-        //        List<TekliBaslik> baslikList = new List<TekliBaslik>();
-
-        //        foreach (var grup in dummyData.GetKalems().Where(w => w.KalemTipiAciklama == "Gider").GroupBy(g => g.AnaBaslikID))
-        //        {
-        //            TekliBaslik baslik = new TekliBaslik();
-        //            foreach (var kalem in grup)
-        //            {
-        //                baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-        //                baslik.Title = kalem.AnaBaslik.BaslikTanimi;
-
-        //                baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = kalem.ParaBirimiKalem.ParaBirimi.Kur, Tutar = kalem.Tutar });
-
-        //            }
-        //            baslikList.Add(baslik);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = base.GetExceptionMessage(ex);
-        //    }
-        //    response.StatusCode = "200";
-        //    response.Explanation = "Success";
-        //    return response;
-        //}
-
-        //public ResponseObject<List<GetBaslikFormData>> GetGelirBaslikDummy()
-        //{
-        //    ResponseObject<List<GetBaslikFormData>> response = new ResponseObject<List<GetBaslikFormData>>();
-
-        //    try
-        //    {
-        //        List<GetBaslikFormData> gbfdList = new List<GetBaslikFormData>();
-
-        //        List<TekliBaslik> baslikList = new List<TekliBaslik>();
-
-        //        foreach (var grup in dummyData.GetKalems().Where(w => w.KalemTipiAciklama == "Gelir").GroupBy(g => g.AnaBaslikID))
-        //        {
-        //            TekliBaslik baslik = new TekliBaslik();
-        //            foreach (var kalem in grup)
-        //            {
-        //                baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-        //                baslik.Title = kalem.AnaBaslik.BaslikTanimi;
-
-        //                baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = kalem.ParaBirimiKalem.ParaBirimi.Kur, Tutar = kalem.Tutar });
-        //            }
-
-        //            baslikList.Add(baslik);
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.IsSuccess = false;
-        //        response.StatusCode = "400";
-        //        response.Explanation = base.GetExceptionMessage(ex);
-        //    }
-        //    response.StatusCode = "200";
-        //    response.Explanation = "Success";
-        //    return response;
-
-        //}
-        #endregion
-
-        #region GET
-        public ResponseObject<List<Kalem>> GetAllKalemler()
+        #region Dapper
+        public ResponseObject<GetBaslikFormData> GetAllBasliklarDapper()
         {
-            ResponseObject<List<Kalem>> response = new ResponseObject<List<Kalem>>();
-
-            try
-            {
-                response.Object = kalemManager.GetAll();
-                response.IsSuccess = true;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "400";
-            }
-            return response;
-        }
-
-        public ResponseObject<List<ParaBirimi>> GetAllParaBirimi()
-        {
-            ResponseObject<List<ParaBirimi>> response = new ResponseObject<List<ParaBirimi>>();
-
-            try
-            {
-                response.Object = dummyData.GetParaBirimleri();//paraBirimiManager.GetAll();
-                response.IsSuccess = true;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "400";
-            }
-            return response;
-        }
-
-        public ResponseObject<GetBaslikFormData> GetAllBaslik()
-        {
+            #region Tanımlamalar
             ResponseObject<GetBaslikFormData> response = new ResponseObject<GetBaslikFormData>();
             GetBaslikFormData gbFormData = new GetBaslikFormData();
-            List<TekliBaslik> baslikList = new List<TekliBaslik>();
-            List<Kalem> kalemList = kalemManager.GetAll();
-            List<string> pbkKurList = kalemList.Select(s => s.ParaBirimiKalem.ParaBirimi.Kur).Distinct().ToList();
-            List<ParaBirimiTutar> pbtList = new List<ParaBirimiTutar>();
-
-            for (int i = 0; i < pbkKurList.Count; i++)
-            {
-                pbtList.Add(new ParaBirimiTutar { ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == pbkKurList[i]), Tutar = 0 });
-            }
+            IEnumerable<TekliBaslikTemp> tempBaslikList = new List<TekliBaslikTemp>();
+            TempBaslikFilterFormData tbffd = new TempBaslikFilterFormData();
+            IEnumerable<string> allCurrencies = null;
+            List<ParaBirimiTutarTemp> pbtList = new List<ParaBirimiTutarTemp>();
+            List<ParaBirimiTutarTemp> totalPbtList = new List<ParaBirimiTutarTemp>();
+            #endregion
 
             try
             {
-                foreach (var grup in kalemList.GroupBy(g => g.AnaBaslikID))
+                var currencyQuery = @"SELECT pbt.Kur
+                                            FROM kalemtable AS kt 
+                                            LEFT JOIN ParaBirimiKalemTable AS pbkt ON pbkt.ID = kt.ParaBirimiKalemID
+                                            LEFT JOIN ParaBirimiTable AS pbt ON pbt.ID =pbkt.ParaBirimiID";
+
+                allCurrencies = dapperRepository.Query<string>(currencyQuery);
+
+
+                var tekliBaslikQuery = $"SELECT * FROM teklibasliktable;";
+                tempBaslikList = dapperRepository.Query<TekliBaslikTemp>(tekliBaslikQuery);
+
+                foreach (var tempBaslik in tempBaslikList)
                 {
-                    TekliBaslik baslik = new TekliBaslik();
-
-                    baslik.Currencies.AddRange(pbtList);
-
-                    foreach (var kalem in grup)
-                    {
-                        baslik.ID = kalem.AnaBaslikID;
-                        baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-                        baslik.FlowDirectionSymbol = kalem.KalemTipiAciklama == "Gelir" ? "+" : "-";
-                        baslik.Title = kalem.AnaBaslik.BaslikTanimi;
-
-                        pbtList.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar += kalem.Tutar;
-                        baslik.Currencies.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar = kalem.Tutar;
-
-                    }
-                    baslikList.Add(baslik);
+                    if (tempBaslik.FlowDirectionSymbol == "+")
+                        tbffd.GelirBasliklar.Add(tempBaslik);
+                    else
+                        tbffd.GiderBasliklar.Add(tempBaslik);
                 }
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.StatusCode = "400";
-                response.Explanation = base.GetExceptionMessage(ex);
-            }
-
-            //gbFormData.Basliklar = baslikList;
-            gbFormData.TotalParaBirimiTutar = pbtList;
-
-            response.StatusCode = "200";
-            response.Explanation = "Success";
-            response.IsSuccess = true;
-            response.Object = gbFormData;
-            return response;
-        }
-
-        public ResponseObject<GetBaslikFormData> GetAllBasliklar()
-        {
-            ResponseObject<GetBaslikFormData> response = new ResponseObject<GetBaslikFormData>();
-            GetBaslikFormData gbFormData = new GetBaslikFormData();
-            List<TekliBaslikTemp> tempBaslikList = new List<TekliBaslikTemp>();
-            List<Kalem> tumKalemler = kalemManager.GetAll();
-            tekliBaslikManager.GetAll().ForEach(each => tempBaslikList.Add(base.AdvancedMap<TekliBaslik, TekliBaslikTemp>(each)));
-            List<ParaBirimiTutar> pbtList = new List<ParaBirimiTutar>();
-
-            try
-            {
-                List<string> pbkKurList = new List<string>();
 
 
-                foreach (var kur in tumKalemler.Select(s => s.ParaBirimiKalem.ParaBirimi.Kur))
+
+                foreach (var kur in allCurrencies)
                 {
-                    if (!(pbkKurList.Contains(kur)))
-                    {
-                        pbkKurList.Add(kur);
-                    }
+                    ParaBirimiTutarTemp totalpbt = new ParaBirimiTutarTemp { ParaBirimi = kur, Tutar = 0 };
+
+                    pbtList.Add(totalpbt);
                 }
+                pbtList.ForEach(each => totalPbtList.Add(new ParaBirimiTutarTemp { ParaBirimi = each.ParaBirimi, Tutar = each.Tutar }));
 
                 foreach (var baslik in tempBaslikList)
                 {
-                    List<Kalem> kalemList = baslik.Kalemler;
+                    var kalemFilterQuery = $"SELECT * FROM kalemtable WHERE TekliBaslikID = '{baslik.ID}';";
+                    IEnumerable<Kalem> kalemList = dapperRepository.Query<Kalem>(kalemFilterQuery);
 
-                    for (int i = 0; i < pbkKurList.Count; i++)
-                    {
-                        ParaBirimiTutar pbt = new ParaBirimiTutar { ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == pbkKurList[i]), ParaBirimiID = paraBirimiManager.SingleGetBy(b => b.Kur == pbkKurList[i]).ID, Tutar = 0 };
-                        pbtList.Add(pbt);
-
-                        if (!(baslik.Currencies.Select(s => s.ParaBirimi.Kur).Contains(pbkKurList[i])))
-                        {
-                            baslik.Currencies.Add(pbt);
-                        }
-                    }
+                    pbtList.ForEach(each => baslik.Currencies.Add(new ParaBirimiTutarTemp { ParaBirimi = each.ParaBirimi, Tutar = each.Tutar }));
 
                     foreach (var kalem in kalemList)
                     {
+                        string query = currencyQuery;
+                        query += $" WHERE kt.KalemID='" + kalem.ID + "'";
+                        string kur = dapperRepository.Query<string>(query).SingleOrDefault();
+
                         if (kalem.KalemTipiAciklama == "Gelir")
                         {
-                            pbtList.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar += kalem.Tutar;
-                            //baslik.Currencies.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar += kalem.Tutar;
+                            totalPbtList.SingleOrDefault(w => w.ParaBirimi == kur).Tutar += kalem.Tutar;
+                            baslik.Currencies.SingleOrDefault(w => w.ParaBirimi == kur).Tutar += kalem.Tutar;
                         }
                         else
                         {
-                            pbtList.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar -= kalem.Tutar;
-                            //baslik.Currencies.SingleOrDefault(w => w.ParaBirimi.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur).Tutar -= kalem.Tutar;
+                            totalPbtList.SingleOrDefault(w => w.ParaBirimi == kur).Tutar -= kalem.Tutar;
+                            baslik.Currencies.SingleOrDefault(w => w.ParaBirimi == kur).Tutar -= kalem.Tutar;
                         }
                     }
-
                 }
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.StatusCode = "400";
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
             }
 
-            gbFormData.Basliklar = tempBaslikList;
-            gbFormData.TotalParaBirimiTutar = pbtList;
+            gbFormData.Basliklar = tbffd;
+            gbFormData.TotalParaBirimiTutar = totalPbtList;
 
             response.StatusCode = "200";
             response.Explanation = "Success";
@@ -335,13 +110,56 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
             return response;
         }
 
-        public ResponseObject<List<GetAnaBaslikFormData>> GetAllAnaBasliklar()
+        public ResponseObject<IEnumerable<Kalem>> GetAllKalemlerDapper()
         {
-            ResponseObject<List<GetAnaBaslikFormData>> response = new ResponseObject<List<GetAnaBaslikFormData>>();
+            ResponseObject<IEnumerable<Kalem>> response = new ResponseObject<IEnumerable<Kalem>>();
 
             try
             {
-                List<GetAnaBaslikFormData> gabfdList = anaBaslikManager.GetAll().Select(s => new GetAnaBaslikFormData { ID = s.ID, Title = s.BaslikTanimi }).ToList();
+                var query = $"SELECT * FROM kalemtable;";
+                response.Object = dapperRepository.Query<Kalem>(query);
+                response.IsSuccess = true;
+                response.StatusCode = "200";
+                response.Explanation = "Success";
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Explanation = ex.Message;
+                response.StatusCode = "400";
+            }
+            return response;
+        }
+
+        public ResponseObject<IEnumerable<ParaBirimi>> GetAllParaBirimiDapper()
+        {
+            ResponseObject<IEnumerable<ParaBirimi>> response = new ResponseObject<IEnumerable<ParaBirimi>>();
+
+            try
+            {
+                var query = $"SELECT * FROM parabirimitable;";
+                response.Object = dapperRepository.Query<ParaBirimi>(query);//paraBirimiManager.GetAll();
+                response.IsSuccess = true;
+                response.StatusCode = "200";
+                response.Explanation = "Success";
+            }
+            catch (Exception ex)
+            {
+                response.IsSuccess = false;
+                response.Explanation = ex.Message;
+                response.StatusCode = "400";
+            }
+            return response;
+        }
+
+        public ResponseObject<IEnumerable<GetAnaBaslikFormData>> GetAllAnaBasliklarDapper()
+        {
+            ResponseObject<IEnumerable<GetAnaBaslikFormData>> response = new ResponseObject<IEnumerable<GetAnaBaslikFormData>>();
+
+            try
+            {
+                var query = $"SELECT ID, BaslikTanimi, IsVadeIliskili FROM anabasliktable";
+                IEnumerable<GetAnaBaslikFormData> gabfdList = dapperRepository.Query<GetAnaBaslikFormData>(query);
                 response.Explanation = "success";
                 response.IsSuccess = true;
                 response.Object = gabfdList;
@@ -351,73 +169,113 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
             {
                 response.IsSuccess = false;
                 response.StatusCode = "400";
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
             }
             return response;
         }
 
-        public ResponseObject<List<GetBaslikFormData>> GetGiderBaslik()
+        public ResponseObject<GetBaslikFormData> GetGiderBaslikDapper()
         {
-            ResponseObject<List<GetBaslikFormData>> response = new ResponseObject<List<GetBaslikFormData>>();
+            #region Tanımlamalar
+            ResponseObject<GetBaslikFormData> response = new ResponseObject<GetBaslikFormData>();
+            GetBaslikFormData gbFormData = new GetBaslikFormData();
+            IEnumerable<TekliBaslikTemp> tempBaslikList = new List<TekliBaslikTemp>();
+            IEnumerable<string> allCurrencies = null;
+            List<ParaBirimiTutarTemp> pbtList = new List<ParaBirimiTutarTemp>();
+            List<ParaBirimiTutarTemp> totalPbtList = new List<ParaBirimiTutarTemp>();
+            #endregion
 
             try
             {
-                List<TekliBaslik> baslikList = new List<TekliBaslik>();
+                var currencyQuery = $"SELECT DISTINCT Kur FROM parabirimitable;";
+                allCurrencies = dapperRepository.Query<string>(currencyQuery);
 
-                foreach (var grup in kalemManager.GetAll().Where(w => w.KalemTipiAciklama == "Gider").GroupBy(g => g.AnaBaslikID))
+                var tekliBaslikQuery = $"SELECT * FROM teklibasliktable;";
+                tempBaslikList = dapperRepository.Query<TekliBaslikTemp>(tekliBaslikQuery);
+
+                foreach (var kur in allCurrencies)
                 {
-                    TekliBaslik baslik = new TekliBaslik();
-                    foreach (var kalem in grup)
+                    ParaBirimiTutarTemp totalpbt = new ParaBirimiTutarTemp { ParaBirimi = kur, Tutar = 0 };
+
+                    pbtList.Add(totalpbt);
+                }
+                pbtList.ForEach(each => totalPbtList.Add(new ParaBirimiTutarTemp { ParaBirimi = each.ParaBirimi, Tutar = each.Tutar }));
+
+                foreach (var baslik in tempBaslikList)
+                {
+                    var kalemFilterQuery = $"SELECT * FROM kalemtable WHERE TekliBaslikID = '{baslik.ID}';";
+                    IEnumerable<Kalem> kalemList = dapperRepository.Query<Kalem>(kalemFilterQuery);
+
+                    pbtList.ForEach(each => baslik.Currencies.Add(new ParaBirimiTutarTemp { ParaBirimi = each.ParaBirimi, Tutar = each.Tutar }));
+
+                    foreach (var kalem in kalemList)
                     {
-                        baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-                        baslik.Title = kalem.AnaBaslik.BaslikTanimi;
+                        string qry = @"SELECT pbt.Kur
+                                            FROM kalemtable AS kt 
+                                            LEFT JOIN ParaBirimiKalemTable AS pbkt ON pbkt.ID = kt.ParaBirimiKalemID
+                                            LEFT JOIN ParaBirimiTable AS pbt ON pbt.ID =pbkt.ParaBirimiID WHERE kt.KalemID='" + kalem.ID + "'";
 
-                        baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur), Tutar = kalem.Tutar });
+                        string kur = dapperRepository.Query<string>(qry).SingleOrDefault();
 
+                        if (kalem.KalemTipiAciklama == "Gelir")
+                        {
+                            totalPbtList.SingleOrDefault(w => w.ParaBirimi == kur).Tutar += kalem.Tutar;
+                            baslik.Currencies.SingleOrDefault(w => w.ParaBirimi == kur).Tutar += kalem.Tutar;
+                        }
+                        else
+                        {
+                            totalPbtList.SingleOrDefault(w => w.ParaBirimi == kur).Tutar -= kalem.Tutar;
+                            baslik.Currencies.SingleOrDefault(w => w.ParaBirimi == kur).Tutar -= kalem.Tutar;
+                        }
                     }
-                    baslikList.Add(baslik);
                 }
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.StatusCode = "400";
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
             }
+
+            gbFormData.Basliklar = null;
+            gbFormData.TotalParaBirimiTutar = totalPbtList;
+
             response.StatusCode = "200";
             response.Explanation = "Success";
+            response.IsSuccess = true;
+            response.Object = gbFormData;
             return response;
         }
 
-        public ResponseObject<List<GetBaslikFormData>> GetGelirBaslik()
+        public ResponseObject<List<GetBaslikFormData>> GetGelirBaslikDapper()
         {
             ResponseObject<List<GetBaslikFormData>> response = new ResponseObject<List<GetBaslikFormData>>();
 
             try
             {
-                List<GetBaslikFormData> gbfdList = new List<GetBaslikFormData>();
+                //List<GetBaslikFormData> gbfdList = new List<GetBaslikFormData>();
 
-                List<TekliBaslik> baslikList = new List<TekliBaslik>();
+                //List<TekliBaslik> baslikList = new List<TekliBaslik>();
 
-                foreach (var grup in kalemManager.GetAll().Where(w => w.KalemTipiAciklama == "Gelir").GroupBy(g => g.AnaBaslikID))
-                {
-                    TekliBaslik baslik = new TekliBaslik();
-                    foreach (var kalem in grup)
-                    {
-                        baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
-                        baslik.Title = kalem.AnaBaslik.BaslikTanimi;
+                //foreach (var grup in kalemManager.GetAllQueryable().Where(w => w.KalemTipiAciklama == "Gelir").GroupBy(g => g.AnaBaslikID))
+                //{
+                //    TekliBaslik baslik = new TekliBaslik();
+                //    foreach (var kalem in grup)
+                //    {
+                //        baslik.FlowDirectionExplanation = kalem.KalemTipiAciklama;
+                //        baslik.Title = kalem.AnaBaslik.BaslikTanimi;
 
-                        baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur), Tutar = kalem.Tutar });
-                    }
+                //        baslik.Currencies.Add(new ParaBirimiTutar { ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == kalem.ParaBirimiKalem.ParaBirimi.Kur), Tutar = kalem.Tutar });
+                //    }
 
-                    baslikList.Add(baslik);
-                }
+                //    baslikList.Add(baslik);
+                //}
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
                 response.StatusCode = "400";
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
             }
             response.StatusCode = "200";
             response.Explanation = "Success";
@@ -425,136 +283,452 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
 
         }
 
-        public List<ParaBirimiTutar> GetTotalParaBirimiTutar(TekliBaslik baslik)
+        public List<ParaBirimiTutar> GetTotalParaBirimiTutarOfBaslikDapper(string baslikID)
         {
             List<ParaBirimiTutar> totalParaBirimiTutar = new List<ParaBirimiTutar>();
+            var query = $"SELECT ParaBirimiID,TekliBaslikID,Tutar FROM parabirimitutartable WHERE TekliBaslikID= '{baslikID}' GROUP BY TekliBaslikID,ParaBirimiID;";
+            var list = dapperRepository.Query<GetTotalParaBirimiTutarFormData>(query);
 
-            foreach (var pbt in baslik.Currencies.GroupBy(g => g.ParaBirimi))
+            foreach (var pbt in list)
             {
+                var innerQuery = $"SELECT * FROM parabirimitable WHERE ID={pbt.ParaBirimiID}";
                 ParaBirimiTutar newPtb = new ParaBirimiTutar();
-                newPtb.ParaBirimi = pbt.Key;
+                newPtb.ParaBirimi = dapperRepository.Query<ParaBirimi>(innerQuery).FirstOrDefault();
+                newPtb.ParaBirimiID = pbt.ParaBirimiID;
+                newPtb.Tutar += pbt.Tutar;
 
-                foreach (var money in pbt)
-                {
-                    newPtb.Tutar += money.Tutar;
-                }
                 totalParaBirimiTutar.Add(newPtb);
             }
 
             return totalParaBirimiTutar;
         }
 
-        public ResponseObject<List<GetBaslikWithDateResponse>> GetAllBasliklarWithDate(GetBaslikWithDateFormData gbwdFormData)
+        public List<ParaBirimiTutar> GetTotalParaBirimiTutarDapper()
         {
-            ResponseObject<List<GetBaslikWithDateResponse>> response = new ResponseObject<List<GetBaslikWithDateResponse>>();
-            List<GetBaslikWithDateResponse> gbwdList = new List<GetBaslikWithDateResponse>();
+            List<ParaBirimiTutar> totalParaBirimiTutar = new List<ParaBirimiTutar>();
+            var query = $"SELECT ID,ParaBirimiID,TekliBaslikID,Tutar FROM parabirimitutartable GROUP BY TekliBaslikID,ParaBirimiID;";
+            var list = dapperRepository.Query<GetTotalParaBirimiTutarFormData>(query);
+
+            foreach (var pbt in list)
+            {
+                var innerQuery = $"SELECT * FROM ideconcashflowdapperdb.parabirimitable WHERE ID={pbt.ParaBirimiID}";
+                ParaBirimiTutar newPtb = new ParaBirimiTutar
+                {
+                    ParaBirimi = dapperRepository.Query<ParaBirimi>(innerQuery).FirstOrDefault(),
+                    ParaBirimiID = pbt.ParaBirimiID
+                };
+
+                newPtb.ID = newPtb.ID;
+
+                newPtb.Tutar += pbt.Tutar;
+
+                totalParaBirimiTutar.Add(newPtb);
+            }
+
+            return totalParaBirimiTutar;
+        }
+
+        public ResponseObject<GetBaslikWithDateResponse> GetAllBasliklarWithDateDapper(GetBaslikWithDateFormData gbwdFormData)
+        {
+            ResponseObject<GetBaslikWithDateResponse> response = new ResponseObject<GetBaslikWithDateResponse>();
+            GetBaslikWithDateResponse gbwdResponse = new GetBaslikWithDateResponse();
 
             try
             {
                 if (gbwdFormData.FilterType.ToLower() == "d")
                 {
-                    List<Kalem> filtrelenmisKalemler = kalemManager.GetBy(w => w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi) >= 0 && w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi.AddDays(15)) <= 0);
-                    var basliklaGruplanmisKalemler = filtrelenmisKalemler.GroupBy(g => g.AnaBaslik);
+                    var dailyQuery = string.Empty;
 
-                    foreach (var baslikGrupKalem in basliklaGruplanmisKalemler)
+                    if (gbwdFormData.AnaBaslikID == "all")
+                        dailyQuery = $"SELECT DAYOFYEAR(kt.VadeTarihi),kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID as 'ParaBirimiID',kt.VadeTarihi " +
+                            $"FROM kalemtable as kt " +
+                            $"JOIN parabirimikalemtable as pbk ON pbk.KalemID = kt.ID " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"WHERE kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddDays(15).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID,kt.VadeTarihi, pb.Kur ORDER BY kt.VadeTarihi;";
+
+
+                    else
+                        dailyQuery = $"SELECT DAYOFYEAR(kt.VadeTarihi),kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID as 'ParaBirimiID',kt.VadeTarihi " +
+                            $"FROM kalemtable as kt " +
+                            $"JOIN parabirimikalemtable as pbk ON pbk.KalemID = kt.ID " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"WHERE kt.AnaBaslikID='{gbwdFormData.AnaBaslikID}' and kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddDays(15).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID,kt.VadeTarihi, pb.Kur ORDER BY kt.VadeTarihi;";
+
+                    var kalemQueryResponseList = dapperRepository.Query<GetParaBirimiParaBirimiKalemQueryResponse>(dailyQuery);
+
+                    foreach (var kalemQueryResponse in kalemQueryResponseList)
                     {
-                        GetBaslikWithDateResponse gbwdResponse = new GetBaslikWithDateResponse()
+                        #region Totals
+                        GetBaslikWithDateTotals gbwdtResponse = gbwdResponse.Totals.SingleOrDefault(s => s.AnaBaslikID == kalemQueryResponse.AnaBaslikID && s.ParaBirimi == kalemQueryResponse.Code);
+                        if (gbwdtResponse == null)
                         {
-                            AnaBaslikID = baslikGrupKalem.Key.ID,
-                            AnaBaslikAciklama = baslikGrupKalem.Key.BaslikTanimi
-                        };
-
-                        foreach (var kurGrupKalem in baslikGrupKalem.GroupBy(g => g.ParaBirimiKalem.ParaBirimi.Kur))
-                        {
-                            double total = 0;
-
-                            foreach (var tarihKurKalem in kurGrupKalem)
-                            {
-                                total += tarihKurKalem.Tutar;
-                            }
-
-                            ParaBirimiTutar pbt = new ParaBirimiTutar()
-                            {
-                                ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == kurGrupKalem.Key),
-                                Tutar = total
-                            };
-                            gbwdResponse.ParaBirimiTutarlar.Add(pbt);
-                            gbwdList.Add(gbwdResponse);
+                            gbwdtResponse = new GetBaslikWithDateTotals();
+                            gbwdtResponse.AnaBaslikID = kalemQueryResponse.AnaBaslikID;
+                            gbwdtResponse.ParaBirimi = kalemQueryResponse.Code;
+                            gbwdtResponse.ToplamTutar = kalemQueryResponse.Total;
                         }
+                        else
+                        {
+                            gbwdtResponse.ToplamTutar += kalemQueryResponse.Total;
+                        }
+
+                        gbwdResponse.Totals.Add(gbwdtResponse);
+                        #endregion
+
+                        #region Details
+
+                        GetBaslikWithDateDetail gbwdd = gbwdResponse.Details.SingleOrDefault(s => s.AnaBaslikID == kalemQueryResponse.AnaBaslikID);
+
+                        if (gbwdd == null)
+                        {
+                            gbwdd = new GetBaslikWithDateDetail();
+                            gbwdd.AnaBaslikID = kalemQueryResponse.AnaBaslikID;
+                            gbwdd.AnaBaslikTanim = dapperRepository.Query<string>($"SELECT BaslikTanimi FROM anabasliktable WHERE ID='{kalemQueryResponse.AnaBaslikID}'").FirstOrDefault();
+
+                            gbwdResponse.Details.Add(gbwdd);
+                        }
+
+                        #region Chart Model
+                        GetBaslikWithDateChartModel gbwdcm = gbwdd.ChartModels.SingleOrDefault(s => s.Name == kalemQueryResponse.Code);
+
+                        if (gbwdcm == null)
+                        {
+                            gbwdcm = new GetBaslikWithDateChartModel();
+                            gbwdcm.Name = kalemQueryResponse.Code;
+                            gbwdd.ChartModels.Add(gbwdcm);
+                        }
+                        gbwdcm.TrueValue += kalemQueryResponse.Total;
+
+                        using (var client = new HttpClient())
+                        {
+                            var responseTask = client.GetAsync("https://api.exchangeratesapi.io/latest?base=" + kalemQueryResponse.Code.ToUpper() + "&symbols=TRY");
+
+                            var result = responseTask.Result;
+
+                            if (result.IsSuccessStatusCode)
+                            {
+                                var readTask = result.Content.ReadAsStringAsync();
+                                readTask.Wait();
+                                var jsonString = readTask.Result;
+                                jsonString = jsonString.Remove(0, jsonString.LastIndexOf(':') + 1);
+                                jsonString = jsonString.Remove(jsonString.Length - 2);
+                                var currencyExchangeResult = JsonConvert.DeserializeObject<double>(jsonString);
+
+                                gbwdcm.Value += currencyExchangeResult * kalemQueryResponse.Total;
+                            }
+                        }
+
+
+
+                        #endregion
+
+                        GetBaslikWithDateContents gbwdc = new GetBaslikWithDateContents();
+                        gbwdc.ParaBirimi = kalemQueryResponse.Code;
+
+                        var firstWeekOfYear = dapperRepository.Query<int>($"SELECT WEEK('{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}')").FirstOrDefault();
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            GetBaslikWithDateCurrencyDate gbwcd = new GetBaslikWithDateCurrencyDate();
+                            gbwcd.Tutar = 0;
+                            gbwcd.VadeTarihi = gbwdFormData.BaslangicTarihi.AddDays(i);
+
+                            gbwdc.CurrencyDates.Add(gbwcd);
+                        }
+
+                        gbwdc.CurrencyDates.SingleOrDefault(w => w.DateIndicator.CompareTo(new DateTime().AddDays(kalemQueryResponse.DateIndicator)) == 0).Tutar += kalemQueryResponse.Total;
+
+                        gbwdd.Contents.Add(gbwdc);
+                        #endregion
                     }
+                    //    #region Totals
+                    //    GetBaslikWithDateTotals gbwdtResponse = gbwdResponse.Totals.SingleOrDefault(s => s.AnaBaslikID == kalemQueryResponse.AnaBaslikID);
+                    //    if (gbwdtResponse == null)
+                    //    {
+                    //        new GetBaslikWithDateTotals();
+                    //        gbwdtResponse.AnaBaslikID = kalemQueryResponse.AnaBaslikID;
+                    //        gbwdtResponse.ParaBirimi = kalemQueryResponse.Code;
+                    //        gbwdtResponse.ToplamTutar = kalemQueryResponse.Total;
+                    //    }
+                    //    else
+                    //    {
+                    //        gbwdtResponse.ToplamTutar += kalemQueryResponse.Total;
+                    //    }
+
+                    //    gbwdResponse.Totals.Add(gbwdtResponse);
+                    //    #endregion
+                    //    #region Details
+
+
+
+                    //    GetBaslikWithDateDetail gbwdd = gbwdResponse.Details.SingleOrDefault(s => s.AnaBaslikID == kalemQueryResponse.AnaBaslikID);
+
+                    //    if (gbwdd == null)
+                    //    {
+                    //        gbwdd = new GetBaslikWithDateDetail();
+                    //        gbwdd.AnaBaslikID = kalemQueryResponse.AnaBaslikID;
+                    //        gbwdd.AnaBaslikTanim = dapperRepository.Query<string>($"SELECT BaslikTanimi FROM anabasliktable WHERE ID='{kalemQueryResponse.AnaBaslikID}'").FirstOrDefault();
+
+                    //        gbwdResponse.Details.Add(gbwdd);
+                    //    }
+                    //    gbwdd.ChartModels.Add(gbwdcm);
+
+
+                    //    #region Chart Model
+                    //    GetBaslikWithDateChartModel gbwdcm = gbwdd.ChartModels.SingleOrDefault(s => s.Name == kalemWeeekly.Code);
+
+                    //    if (gbwdcm == null)
+                    //    {
+                    //        gbwdcm = new GetBaslikWithDateChartModel();
+                    //        gbwdcm.Name = kalemWeeekly.Code;
+                    //        gbwdd.ChartModels.Add(gbwdcm);
+                    //    }
+                    //    gbwdcm.TrueValue += kalemWeeekly.Total;
+
+                    //    using (var client = new HttpClient())
+                    //    {
+                    //        var responseTask = client.GetAsync("https://api.exchangeratesapi.io/latest?base=" + kalemQueryResponse.Code.ToUpper() + "&symbols=TRY");
+
+                    //        var result = responseTask.Result;
+
+                    //        if (result.IsSuccessStatusCode)
+                    //        {
+                    //            var readTask = result.Content.ReadAsStringAsync();
+                    //            readTask.Wait();
+                    //            var jsonString = readTask.Result;
+                    //            jsonString = jsonString.Remove(0, jsonString.LastIndexOf(':') + 1);
+                    //            jsonString = jsonString.Remove(jsonString.Length - 2);
+                    //            var currencyExchangeResult = JsonConvert.DeserializeObject<double>(jsonString);
+
+                    //            gbwdcm.Value = currencyExchangeResult * kalemQueryResponse.Total;
+                    //        }
+                    //    }
+                    //    #endregion
+
+
+
+                    //    GetBaslikWithDateContents gbwdc = new GetBaslikWithDateContents();
+                    //    gbwdc.ParaBirimi = kalemQueryResponse.Code;
+
+                    //    for (int i = 0; i < 15; i++)
+                    //    {
+                    //        gbwdc.CurrencyDates.Add(new GetBaslikWithDateCurrencyDate { VadeTarihi = gbwdFormData.BaslangicTarihi.AddDays(i), Tutar = 0 });
+                    //    }
+
+                    //    gbwdc.CurrencyDates.SingleOrDefault(w => w.VadeTarihi.ToShortDateString().Equals(kalemQueryResponse.VadeTarihi.ToShortDateString())).Tutar += kalemQueryResponse.Total;
+
+                    //    gbwdd.Contents.Add(gbwdc);
+                    //    #endregion
+                    //}
+
                 }
                 else if (gbwdFormData.FilterType.ToLower() == "w")
                 {
-                    List<Kalem> filtrelenmisKalemler = kalemManager.GetBy(w => w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi) >= 0 && w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi.AddDays(105)) <= 0);
-                    var basliklaGruplanmisKalemler = filtrelenmisKalemler.GroupBy(g => g.AnaBaslik);
+                    var weeklyQuery = string.Empty;
 
-                    foreach (var baslikGrupKalem in basliklaGruplanmisKalemler)
+                    #region Queries
+                    if (gbwdFormData.AnaBaslikID == "all")
+                        weeklyQuery = $"SELECT WEEK(kt.VadeTarihi,DAYOFWEEK(kt.VadeTarihi)) as DateIndicator,kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID,kt.VadeTarihi " +
+                            $"FROM parabirimikalemtable as pbk " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"JOIN kalemtable AS kt ON kt.ID = pbk.KalemID " +
+                            $"WHERE kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddDays(105).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID,pb.Code,WEEK(kt.VadeTarihi,DAYOFWEEK(kt.VadeTarihi))";
+
+                    else
+                        weeklyQuery = $"SELECT WEEK(kt.VadeTarihi,DAYOFWEEK(kt.VadeTarihi)) as DateIndicator,kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID,kt.VadeTarihi " +
+                            $"FROM parabirimikalemtable as pbk " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"JOIN kalemtable AS kt ON kt.ID = pbk.KalemID " +
+                            $"WHERE AnaBaslikID='{gbwdFormData.AnaBaslikID}' AND kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddDays(105).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID,pb.Code,WEEK(kt.VadeTarihi,DAYOFWEEK(kt.VadeTarihi))";
+
+                    var filtrelenmisKalemlerWeekly = dapperRepository.Query<GetParaBirimiParaBirimiKalemQueryResponse>(weeklyQuery);
+                    if (filtrelenmisKalemlerWeekly == null)
+                        throw new Exception($"Query Error!: Query: {weeklyQuery}");
+                    #endregion
+
+                    foreach (var kalemWeeekly in filtrelenmisKalemlerWeekly)
                     {
-                        GetBaslikWithDateResponse gbwdResponse = new GetBaslikWithDateResponse()
+                        #region Totals
+                        GetBaslikWithDateTotals gbwdtResponse = gbwdResponse.Totals.SingleOrDefault(s => s.AnaBaslikID == kalemWeeekly.AnaBaslikID && s.ParaBirimi == kalemWeeekly.Code);
+                        if (gbwdtResponse == null)
                         {
-                            AnaBaslikID = baslikGrupKalem.Key.ID,
-                            AnaBaslikAciklama = baslikGrupKalem.Key.BaslikTanimi
-                        };
-
-                        var tarihGruplanmisKalemler = baslikGrupKalem.GroupBy(i => CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(
-            i.VadeTarihi, CalendarWeekRule.FirstDay, CultureInfo.CurrentCulture.Calendar.GetDayOfWeek(i.VadeTarihi)));
-
-                        foreach (var tarihGruplanmisKalem in tarihGruplanmisKalemler)
+                            gbwdtResponse = new GetBaslikWithDateTotals();
+                            gbwdtResponse.AnaBaslikID = kalemWeeekly.AnaBaslikID;
+                            gbwdtResponse.ParaBirimi = kalemWeeekly.Code;
+                            gbwdtResponse.ToplamTutar = kalemWeeekly.Total;
+                        }
+                        else
                         {
-                            foreach (var tarihKurGrupKalem in tarihGruplanmisKalem.GroupBy(g => g.ParaBirimiKalem.ParaBirimi.Kur))
+                            gbwdtResponse.ToplamTutar += kalemWeeekly.Total;
+                        }
+
+                        gbwdResponse.Totals.Add(gbwdtResponse);
+                        #endregion
+
+                        #region Details
+
+                        GetBaslikWithDateDetail gbwdd = gbwdResponse.Details.SingleOrDefault(s => s.AnaBaslikID == kalemWeeekly.AnaBaslikID);
+
+                        if (gbwdd == null)
+                        {
+                            gbwdd = new GetBaslikWithDateDetail();
+                            gbwdd.AnaBaslikID = kalemWeeekly.AnaBaslikID;
+                            gbwdd.AnaBaslikTanim = dapperRepository.Query<string>($"SELECT BaslikTanimi FROM anabasliktable WHERE ID='{kalemWeeekly.AnaBaslikID}'").FirstOrDefault();
+
+                            gbwdResponse.Details.Add(gbwdd);
+                        }
+
+                        #region Chart Model
+                        GetBaslikWithDateChartModel gbwdcm = gbwdd.ChartModels.SingleOrDefault(s => s.Name == kalemWeeekly.Code);
+
+                        if (gbwdcm == null)
+                        {
+                            gbwdcm = new GetBaslikWithDateChartModel();
+                            gbwdcm.Name = kalemWeeekly.Code;
+                            gbwdd.ChartModels.Add(gbwdcm);
+                        }
+                        gbwdcm.TrueValue += kalemWeeekly.Total;
+
+                        using (var client = new HttpClient())
+                        {
+                            var responseTask = client.GetAsync("https://api.exchangeratesapi.io/latest?base=" + kalemWeeekly.Code.ToUpper() + "&symbols=TRY");
+
+                            var result = responseTask.Result;
+
+                            if (result.IsSuccessStatusCode)
                             {
-                                double total = 0;
+                                var readTask = result.Content.ReadAsStringAsync();
+                                readTask.Wait();
+                                var jsonString = readTask.Result;
+                                jsonString = jsonString.Remove(0, jsonString.LastIndexOf(':') + 1);
+                                jsonString = jsonString.Remove(jsonString.Length - 2);
+                                var currencyExchangeResult = JsonConvert.DeserializeObject<double>(jsonString);
 
-                                foreach (var tarihKurKalem in tarihKurGrupKalem)
-                                {
-                                    total += tarihKurKalem.Tutar;
-                                }
-                                ParaBirimiTutar pbt = new ParaBirimiTutar()
-                                {
-                                    ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == tarihKurGrupKalem.Key),
-                                    Tutar = total
-                                };
-                                gbwdResponse.ParaBirimiTutarlar.Add(pbt);
-                                gbwdList.Add(gbwdResponse);
+                                gbwdcm.Value += currencyExchangeResult * kalemWeeekly.Total;
                             }
                         }
+
+
+
+                        #endregion
+
+                        GetBaslikWithDateContents gbwdc = new GetBaslikWithDateContents();
+                        gbwdc.ParaBirimi = kalemWeeekly.Code;
+
+                        var firstWeekOfYear = dapperRepository.Query<int>($"SELECT WEEK('{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}')").FirstOrDefault();
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            GetBaslikWithDateCurrencyDate gbwcd = new GetBaslikWithDateCurrencyDate();
+                            gbwcd.Tutar = 0;
+                            gbwcd.VadeTarihi = gbwdFormData.BaslangicTarihi.AddDays(i * 7);
+                            gbwcd.DateIndicator = new DateTime().AddDays(firstWeekOfYear + i);
+
+                            gbwdc.CurrencyDates.Add(gbwcd);
+                        }
+
+                        gbwdc.CurrencyDates.SingleOrDefault(w => w.DateIndicator.CompareTo(new DateTime().AddDays(kalemWeeekly.DateIndicator)) == 0).Tutar += kalemWeeekly.Total;
+
+                        gbwdd.Contents.Add(gbwdc);
+                        #endregion
                     }
+
                 }
                 else if (gbwdFormData.FilterType.ToLower() == "m")
                 {
-                    List<Kalem> filtrelenmisKalemler = kalemManager.GetBy(w => w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi) >= 0 && w.VadeTarihi.CompareTo(gbwdFormData.BaslangicTarihi.AddMonths(105)) <= 0);
-                    var basliklaGruplanmisKalemler = filtrelenmisKalemler.GroupBy(g => g.AnaBaslik);
+                    var monthlyQuery = string.Empty;
 
-                    foreach (var baslikGrupKalem in basliklaGruplanmisKalemler)
+                    #region Queries
+                    if (gbwdFormData.AnaBaslikID == "all")
+                        monthlyQuery = $"SELECT date_format(date_sub(kt.VadeTarihi, interval {gbwdFormData.BaslangicTarihi.Day} day),'%Y%m')  as DateIndicator ,kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID,kt.VadeTarihi " +
+                            $"FROM parabirimikalemtable as pbk " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"JOIN kalemtable AS kt ON kt.ID = pbk.KalemID " +
+                            $"WHERE kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddMonths(15).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID, pb.Code,DateIndicator;";
+
+
+                    else
+                        monthlyQuery = $"SELECT date_format(date_sub(kt.VadeTarihi, interval {gbwdFormData.BaslangicTarihi.Day} day),'%Y%m') as DateIndicator ,kt.AnaBaslikID,SUM(pbk.Tutar) as 'Total',pb.Code,pb.ID,kt.VadeTarihi " +
+                            $"FROM parabirimikalemtable as pbk " +
+                            $"JOIN parabirimitable as pb ON pbk.ParaBirimiID = pb.ID " +
+                            $"JOIN kalemtable AS kt ON kt.ID = pbk.KalemID " +
+                            $"WHERE AnaBaslikID='{gbwdFormData.AnaBaslikID}' AND kt.VadeTarihi between '{gbwdFormData.BaslangicTarihi.ToString("yyyy-MM-dd")}' and '{gbwdFormData.BaslangicTarihi.AddMonths(15).ToString("yyyy-MM-dd")}' " +
+                            $"GROUP BY kt.AnaBaslikID, pb.Code,DateIndicator;";
+
+
+                    var filtrelenmisKalemlerMonthly = dapperRepository.Query<GetParaBirimiParaBirimiKalemQueryResponse>(monthlyQuery);
+                    if (filtrelenmisKalemlerMonthly == null)
+                        throw new Exception($"Query Error!: Query:{monthlyQuery}");
+                    #endregion
+                    foreach (var kalemMonthly in filtrelenmisKalemlerMonthly)
                     {
-                        GetBaslikWithDateResponse gbwdResponse = new GetBaslikWithDateResponse()
-                        {
-                            AnaBaslikID = baslikGrupKalem.Key.ID,
-                            AnaBaslikAciklama = baslikGrupKalem.Key.BaslikTanimi
-                        };
+                        #region Totals
+                        GetBaslikWithDateTotals gbwdtResponse = new GetBaslikWithDateTotals();
+                        gbwdtResponse.AnaBaslikID = kalemMonthly.AnaBaslikID;
+                        gbwdtResponse.ParaBirimi = kalemMonthly.Code;
+                        gbwdtResponse.ToplamTutar = kalemMonthly.Total;
 
-                        var tarihGruplanmisKalemler = baslikGrupKalem.GroupBy(g => g.VadeTarihi.Month);
+                        gbwdResponse.Totals.Add(gbwdtResponse);
+                        #endregion
 
-                        foreach (var tarihGruplanmisKalem in tarihGruplanmisKalemler)
+                        #region Details
+
+                        #region Chart Model
+                        GetBaslikWithDateChartModel gbwdcm = new GetBaslikWithDateChartModel();
+                        gbwdcm.Name = kalemMonthly.Code;
+                        gbwdcm.TrueValue = kalemMonthly.Total;
+
+                        using (var client = new HttpClient())
                         {
-                            foreach (var tarihKurGrupKalem in tarihGruplanmisKalem.GroupBy(g => g.ParaBirimiKalem.ParaBirimi.Kur))
+                            var responseTask = client.GetAsync("https://api.exchangeratesapi.io/latest?base=" + kalemMonthly.Code.ToUpper() + "&symbols=TRY");
+
+                            var result = responseTask.Result;
+
+                            if (result.IsSuccessStatusCode)
                             {
-                                double total = 0;
+                                var readTask = result.Content.ReadAsStringAsync();
+                                readTask.Wait();
+                                var jsonString = readTask.Result;
+                                jsonString = jsonString.Remove(0, jsonString.LastIndexOf(':') + 1);
+                                jsonString = jsonString.Remove(jsonString.Length - 2);
+                                var currencyExchangeResult = JsonConvert.DeserializeObject<double>(jsonString);
 
-                                foreach (var tarihKurKalem in tarihKurGrupKalem)
-                                {
-                                    total += tarihKurKalem.Tutar;
-                                }
-                                ParaBirimiTutar pbt = new ParaBirimiTutar()
-                                {
-                                    ParaBirimi = paraBirimiManager.SingleGetBy(b => b.Kur == tarihKurGrupKalem.Key),
-                                    Tutar = total
-                                };
-                                gbwdResponse.ParaBirimiTutarlar.Add(pbt);
-                                gbwdList.Add(gbwdResponse);
+                                gbwdcm.Value = currencyExchangeResult * kalemMonthly.Total;
                             }
                         }
+                        #endregion
+
+                        GetBaslikWithDateDetail gbwdd = gbwdResponse.Details.SingleOrDefault(s => s.AnaBaslikID == kalemMonthly.AnaBaslikID);
+
+                        if (gbwdd == null)
+                        {
+                            gbwdd = new GetBaslikWithDateDetail();
+                            gbwdd.AnaBaslikID = kalemMonthly.AnaBaslikID;
+                            gbwdd.AnaBaslikTanim = dapperRepository.Query<string>($"SELECT BaslikTanimi FROM anabasliktable WHERE ID='{kalemMonthly.AnaBaslikID}'").FirstOrDefault();
+
+                            gbwdResponse.Details.Add(gbwdd);
+                        }
+                        gbwdd.ChartModels.Add(gbwdcm);
+
+                        GetBaslikWithDateContents gbwdc = new GetBaslikWithDateContents();
+                        gbwdc.ParaBirimi = kalemMonthly.Code;
+
+                        for (int i = 0; i < 15; i++)
+                        {
+                            gbwdc.CurrencyDates.Add(new GetBaslikWithDateCurrencyDate { DateIndicator = new DateTime().AddMonths(kalemMonthly.DateIndicator + i), VadeTarihi = gbwdFormData.BaslangicTarihi.AddDays(i * 7), Tutar = 0 });
+                        }
+
+                        gbwdc.CurrencyDates.SingleOrDefault(w => w.DateIndicator == new DateTime().AddMonths(kalemMonthly.DateIndicator)).Tutar += kalemMonthly.Total;
+
+                        gbwdd.Contents.Add(gbwdc);
+                        #endregion
                     }
+
                 }
                 else
                 {
@@ -567,135 +741,230 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
                 response.StatusCode = "400";
+
+                return response;
             }
 
 
             response.StatusCode = "200";
             response.Explanation = "Success";
             response.IsSuccess = true;
-            response.Object = gbwdList;
+            response.Object = gbwdResponse;/*gbwdList;*/
 
             return response;
         }
 
-        #endregion
-
-        #region CREATE
-
-        public ResponseObject<Kalem> AddKalem(AddKalemFormData kalemFormData)
+        public ResponseObject<Kalem> CreateKalemDapper(AddKalemFormData kalemFormData)
         {
             ResponseObject<Kalem> response = new ResponseObject<Kalem>();
 
             try
             {
-                //List<string> excludedColumns = new List<string>() { "AnaBaslikID" };
                 Kalem kalem = base.AdvancedMap<AddKalemFormData, Kalem>(kalemFormData);
-                string ID = FakeData.TextData.GetAlphabetical(10);
-                while (kalemManager.GetAll().Select(s => s.KalemID).Contains(ID))
+                Dictionary<Type, bool> isUpdatedDictionary = new Dictionary<Type, bool>();
+                isUpdatedDictionary.Add(typeof(TekliBaslik), false);
+
+
+                var kalemIDQuery = $"SELECT DISTINCT KalemID FROM kalemtable;";
+                string ID = FakeData.TextData.GetAlphaNumeric(30);
+                var kalemIDList = dapperRepository.Query<string>(kalemIDQuery);
+
+                while (kalemIDList.Contains(ID))
                 {
-                    ID = FakeData.TextData.GetAlphabetical(10);
+                    ID = FakeData.TextData.GetAlphaNumeric(30);
                 }
-                kalem.KalemID = ID;
+                kalem.ID = ID;
 
                 #region Para Birimi Kalem
                 ParaBirimiKalem pbk = new ParaBirimiKalem();
-                pbk.Kalem = kalem;
-                kalem.ParaBirimiKalem = pbk;
+                pbk.ID = kalem.ID;
+                kalem.ParaBirimiKalemID = pbk.ID;
                 kalem.KalemTipiSymbol = kalem.KalemTipiAciklama == "Gelir" ? "+" : "-";
 
-                pbk.ParaBirimi = paraBirimiManager.SingleGetBy(g => g.Code == kalemFormData.ParaBirimi);
+                var paraBirimiQuery = $"SELECT ID FROM ParaBirimiTable WHERE Code='{kalemFormData.ParaBirimi}'";
+                pbk.ParaBirimiID = dapperRepository.Query<int>(paraBirimiQuery).FirstOrDefault();
                 pbk.Tutar = kalem.Tutar;
 
-                paraBirimiKalemManager.Add(pbk);
+
+                var pbkInsertQuery = $"INSERT INTO parabirimikalemtable (ID,ParaBirimiID,Tutar) VALUES ('{pbk.ID}',{pbk.ParaBirimiID},{pbk.Tutar})";
+
+                dapperRepository.Execute(pbkInsertQuery);
+                //paraBirimiKalemManager.Add(pbk);
 
                 #endregion
 
                 #region Ana Başlık Ops
-                AnaBaslik anaBaslik = anaBaslikManager.SingleGetBy(kalemFormData.AnaBaslikID);
-                if (anaBaslikManager == null)
+                var anaBaslikQuery = $"SELECT * FROM anabasliktable WHERE ID='{kalemFormData.AnaBaslikID}'";
+                AnaBaslik anaBaslik = dapperRepository.Query<AnaBaslik>(anaBaslikQuery).FirstOrDefault();
+
+                if (anaBaslik == null)
                 {
+                    var anaBaslikIDQuery = $"SELECT DISTINCT ID FROM anabasliktable;";
+                    string anaBaslikID = FakeData.TextData.GetAlphaNumeric(30);
+                    var anaBaslikIDList = dapperRepository.Query<string>(anaBaslikIDQuery);
+
+                    while (anaBaslikIDList.Contains(anaBaslikID))
+                    {
+                        anaBaslikID = FakeData.TextData.GetAlphaNumeric(30);
+                    }
+
                     anaBaslik = new AnaBaslik();
                     anaBaslik = base.AdvancedMap<AddKalemFormData, AnaBaslik>(kalemFormData);
-                    kalem.AnaBaslik = anaBaslik;
-                    anaBaslik.Kalemler.Add(kalem);
-                    anaBaslikManager.Add(anaBaslik);
+
+                    kalem.AnaBaslikID = anaBaslikID;
+                    anaBaslik.ID = anaBaslikID;
+                    //dapperRepository.Insert<AnaBaslik>(anaBaslik);
                 }
                 else
                 {
                     if (anaBaslik.IsVadeIliskili)
                         kalem.VadeTarihi = DateTime.Now;
 
-                    kalem.AnaBaslik = anaBaslik;
-                    anaBaslik.Kalemler.Add(kalem);
+                    //dapperRepository.Update<Kalem>(kalem);
+                    //isUpdatedDictionary[typeof(AnaBaslik)]
                 }
                 #endregion
 
                 #region Başlık Ops
-                TekliBaslik tekliBaslik = tekliBaslikManager.SingleGetByAnaBaslik(kalemFormData.AnaBaslikID);
+                var tekliBaslikQuery = $"SELECT * FROM teklibasliktable WHERE ID='{kalemFormData.AnaBaslikID}'";
+
+                TekliBaslik tekliBaslik = dapperRepository.Query<TekliBaslik>(tekliBaslikQuery).FirstOrDefault();
                 if (tekliBaslik == null)
                 {
                     tekliBaslik = new TekliBaslik();
 
+                    var tekliBaslikIDQuery = $"SELECT DISTINCT ID FROM teklibasliktable;";
+                    string tekliBaslikID = anaBaslik.ID;
+
+                    tekliBaslik.ID = tekliBaslikID;
                     tekliBaslik.FlowDirectionExplanation = kalemFormData.KalemTipiAciklama;
                     tekliBaslik.FlowDirectionSymbol = kalemFormData.KalemTipiAciklama == "Gelir" ? "+" : "-";
 
                     tekliBaslik.Title = anaBaslik.BaslikTanimi;
-                    tekliBaslik.ID = FakeData.TextData.GetAlphabetical(15);
-                    tekliBaslik.AnaBaslikID = anaBaslik.ID;
-                    tekliBaslik.AnaBaslik = anaBaslik;
-                    anaBaslik.TekliBaslik = tekliBaslik;
-                    anaBaslik.TekliBaslikID = tekliBaslik.ID;
+                    //anaBaslik.TekliBaslikID = tekliBaslik.ID;
 
-                    tekliBaslik.Kalemler.Add(kalem);
-                    kalem.TekliBaslik = tekliBaslik;
                     kalem.TekliBaslikID = tekliBaslik.ID;
+                    var tbInsertQuery = $"INSERT INTO teklibasliktable (ID,FlowDirectionSymbol,FlowDirectionExplanation,Title) " +
+                        $"VALUES ('{tekliBaslik.ID}','{tekliBaslik.FlowDirectionSymbol}','{tekliBaslik.FlowDirectionExplanation}','{tekliBaslik.Title}')";
 
-                    tekliBaslikManager.Add(tekliBaslik);
+                    dapperRepository.Execute(tbInsertQuery);
                 }
                 else
                 {
-                    tekliBaslik.AnaBaslik = anaBaslik;
-                    anaBaslik.TekliBaslik = tekliBaslik;
+                    //tekliBaslik.ID = anaBaslik.ID;
+                    //anaBaslik.TekliBaslikID = tekliBaslik.ID;
+                    kalem.TekliBaslikID = tekliBaslik.ID;
+                    //var tekliBaslikUpdateQuery = $"UPDATE teklibasliktable SET" +
+                    //    $"AnaBaslikID='{tekliBaslik.ID}' WHERE ID='{tekliBaslik.ID}'";
 
-                    tekliBaslik.Kalemler.Add(kalem);
-                    kalem.TekliBaslik = tekliBaslik;
+
+                    //dapperRepository.Execute(tekliBaslikUpdateQuery);
                 }
 
 
                 #endregion
 
                 #region Para Birimi Tutar Ops
-                ParaBirimiTutar pbt = tekliBaslik.Currencies.SingleOrDefault(w => w.ParaBirimi.Code == kalemFormData.ParaBirimi);
+                var paraBirimiTutarQuery = @"SELECT * FROM parabirimitutartable as pbt 
+                                    WHERE pbt.TekliBaslikID='" + tekliBaslik.ID + "' AND " +
+                                    "pbt.ParaBirimiID=(SELECT ID FROM parabirimitable as pb WHERE pb.Code='" + kalemFormData.ParaBirimi + "')";
 
+                ParaBirimiTutar pbt = dapperRepository.Query<ParaBirimiTutar>(paraBirimiTutarQuery).FirstOrDefault();
+                //tekliBaslik.Currencies.SingleOrDefault(w => w.ParaBirimi.Code == kalemFormData.ParaBirimi);
                 if (pbt == null)
                 {
                     pbt = new ParaBirimiTutar();
 
-                    pbt.TekliBaslik = tekliBaslik;
-                    //pbt.TekliBaslikID = tekliBaslik.ID;
-                    tekliBaslik.Currencies.Add(pbt);
+                    var paraBirimiIDQuery = $"SELECT DISTINCT KalemID FROM kalemtable;";
+                    string paraBirimiID = FakeData.TextData.GetAlphaNumeric(30);
+                    var paraBirimiIDList = dapperRepository.Query<string>(paraBirimiIDQuery);
 
-                    pbt.ParaBirimi = paraBirimiManager.SingleGetBy(g => g.Code == kalemFormData.ParaBirimi);
+                    while (paraBirimiIDList.Contains(paraBirimiID))
+                    {
+                        paraBirimiID = FakeData.TextData.GetAlphaNumeric(30);
+                    }
+
+                    pbt.TekliBaslikID = tekliBaslik.ID;
+
+                    pbt.ParaBirimiID = pbk.ParaBirimiID;
                     pbt.Tutar += kalemFormData.Tutar;
-                    
-                    paraBirimiTutarManager.Add(pbt);
 
+                    var pbtInsertQuery = $"INSERT INTO parabirimitutartable (ID,ParaBirimiID,Tutar) VALUES ('{pbt.ID}',{pbt.ParaBirimiID},{pbt.Tutar})";
+
+
+                    dapperRepository.Execute(pbtInsertQuery);
                 }
                 else
+                {
                     pbt.Tutar += kalemFormData.Tutar;
+
+                    var paraBirimiTutarUpdateQuery = $"UPDATE parabirimitutartable SET " +
+                       $"Tutar={pbt.Tutar} WHERE ID={pbt.ID}";
+
+                    dapperRepository.Execute(paraBirimiTutarUpdateQuery);
+                }
                 #endregion
 
                 #region Ekleyen ve Duzenleyen User Ops
-                User ekleyenUser = userManager.GetByID(kalemFormData.EkleyenUserID);
-                ekleyenUser.EklenenKalemler.Add(kalem);
-                kalem.Ekleyen = ekleyenUser;
+                //var userQuery = $"SELECT * FROM usertable WHERE ID={kalemFormData.EkleyenUserID}";
+                //User ekleyenUser = dapperRepository.Query<User>(userQuery).FirstOrDefault(); /*userManager.GetByID(kalemFormData.EkleyenUserID)*/
+
+                kalem.EkleyenUserID = kalemFormData.EkleyenUserID;
 
                 #endregion
 
-                kalemManager.Add(kalem);
-                uow.Save();
+                var anaBaslikInsertQuery = $"INSERT INTO anabasliktable (ID,BaslikTanimi,IsVadeIliskili,SirketKodu)" +
+                    $"VALUES ('{anaBaslik.ID}','{anaBaslik.BaslikTanimi}',{anaBaslik.IsVadeIliskili},'{anaBaslik.SirketKodu}')";
+
+                //dapperRepository.Execute(anaBaslikInsertQuery);
+
+                Dictionary<string, string> ekAlanlarDict = new Dictionary<string, string>();
+                ekAlanlarDict.Add("EkAlan1", kalem.EkAlan1);
+                ekAlanlarDict.Add("EkAlan2", kalem.EkAlan2);
+                ekAlanlarDict.Add("EkAlan3", kalem.EkAlan3);
+                ekAlanlarDict.Add("EkAlan4", kalem.EkAlan4);
+                ekAlanlarDict.Add("EkAlan5", kalem.EkAlan5);
+
+                Dictionary<string, string> filteredEkAlanlarDict = new Dictionary<string, string>();
+
+                foreach (var pair in ekAlanlarDict)
+                {
+                    if (pair.Value != null)
+                    {
+                        filteredEkAlanlarDict.Add(pair.Key, pair.Value);
+                    }
+                }
+
+                kalem.DuzenlemeTarihi = DateTime.Now;
+                kalem.EklemeTarihi = DateTime.Now;
+                kalem.DuzenleyenUserID = kalemFormData.EkleyenUserID;
+
+
+                var kalemInsertQuery = $"INSERT INTO kalemtable (KalemID,FaturaTarihi,VadeTarihi,EklemeTarihi,DuzenlemeTarihi,DuzenleyenUserID,EkleyenUserID,IsTahmin,Aciklama,TekliBaslikID,AnaBaslikID," +
+                    $"ParaBirimiKalemID,IsUserCreation,KalemTipiAciklama,KalemTipiSymbol,Tutar,";
+
+                foreach (var filteredPair in filteredEkAlanlarDict)
+                {
+                    kalemInsertQuery += filteredPair.Key + ",";
+                }
+
+
+                kalemInsertQuery = kalemInsertQuery.Remove(kalemInsertQuery.LastIndexOf(','));
+                kalemInsertQuery += $") VALUES ('{kalem.ID}','{kalem.FaturaTarihi.ToString("yyyy-MM-dd HH:mm:ss")}','{kalem.VadeTarihi.ToString("yyyy-MM-dd HH:mm:ss")}','{kalem.EklemeTarihi.ToString("yyyy-MM-dd HH:mm:ss")}'," +
+                    $"'{kalem.DuzenlemeTarihi.ToString("yyyy-MM-dd HH:mm:ss")}',{kalem.DuzenleyenUserID},{kalem.EkleyenUserID},{kalem.IsTahmin},'{kalem.Aciklama}','{kalem.TekliBaslikID}'," +
+                    $"'{kalem.AnaBaslikID}','{kalem.ParaBirimiKalemID}',{kalem.IsUserCreation},'{kalem.KalemTipiAciklama}','{kalem.KalemTipiSymbol}',{kalem.Tutar},";
+
+
+                foreach (var filteredPair in filteredEkAlanlarDict)
+                {
+                    kalemInsertQuery += "'" + filteredPair.Value + "',";
+                }
+                kalemInsertQuery = kalemInsertQuery.Remove(kalemInsertQuery.Count() - 1);
+                kalemInsertQuery += $")";
+
+                dapperRepository.Execute(kalemInsertQuery);
 
                 response.IsSuccess = true;
                 response.Object = kalem;
@@ -705,139 +974,46 @@ namespace IdeconCashFlow.Business.ManagerFolder.ComplexManagerFolder
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
                 response.StatusCode = "400";
             }
             return response;
         }
 
-        public ResponseObject<GetAnaBaslikFormData> AddAnaBaslik(AddAnaBaslikRequestObject requestObject)
+        public ResponseObject<GetAnaBaslikFormData> CreateAnaBaslikDapper(AddAnaBaslikRequestObject requestObject)
         {
             ResponseObject<GetAnaBaslikFormData> response = new ResponseObject<GetAnaBaslikFormData>();
 
             try
             {
-                AnaBaslik anaBaslik = new AnaBaslik();
-                string ID = FakeData.TextData.GetAlphabetical(10);
-                while (anaBaslikManager.GetAll().Select(s => s.ID).Contains(ID))
+                string ID = string.Empty;
+                string anaBaslikIDQuery = string.Empty;
+                string anaBaslikIDFromDb = string.Empty;
+
+                do
                 {
-                    ID = FakeData.TextData.GetAlphabetical(10);
+                    ID = FakeData.TextData.GetAlphaNumeric(30);
+                    anaBaslikIDQuery = $"SELECT ID FROM anabasliktable WHERE ID={ID}";
+                    dapperRepository.Query<string>(anaBaslikIDQuery).FirstOrDefault();
                 }
-                anaBaslik.ID = ID;
-                anaBaslik.BaslikTanimi = requestObject.Title;
-                anaBaslik.IsVadeIliskili = requestObject.IsVadeIliskili;
-                //anaBaslik.SirketKodu=JWT deki userın sirket kodu
-                anaBaslikManager.Add(anaBaslik);
-                uow.Save();
+                while (!String.IsNullOrEmpty(anaBaslikIDFromDb));
+
+                var anaBaslikInsertQuery = $"INSERT INTO anabasliktable (ID,BaslikTanimi,IsVadeIliskili,SirketKodu) VALUES ({ID},{requestObject.Title},{requestObject.IsVadeIliskili},{requestObject.SirketKodu})";
+
                 response.IsSuccess = true;
-                response.Object = new GetAnaBaslikFormData() { ID = anaBaslik.ID, Title = anaBaslik.BaslikTanimi };
+                response.Object = new GetAnaBaslikFormData() { ID = ID, BaslikTanimi = requestObject.Title };
                 response.StatusCode = "200";
                 response.Explanation = "Success";
             }
             catch (Exception ex)
             {
                 response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
+                response.Explanation = ex.Message;
                 response.StatusCode = "400";
             }
             return response;
         }
-
-        public ResponseObject<ParaBirimi> AddParaBirimi(ParaBirimi paraBirimi)
-        {
-            ResponseObject<ParaBirimi> response = new ResponseObject<ParaBirimi>();
-
-            try
-            {
-                paraBirimiManager.Add(paraBirimi);
-                uow.Save();
-                response.IsSuccess = true;
-                response.Object = paraBirimi;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "400";
-            }
-            return response;
-        }
-        #endregion
-
-        #region UPDATE
-
-        public ResponseObject<Kalem> UpdateKalem(Kalem kalem)
-        {
-            ResponseObject<Kalem> response = new ResponseObject<Kalem>();
-
-            try
-            {
-                kalemManager.Add(kalem);
-                uow.Save();
-                response.IsSuccess = true;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-                response.Object = kalem;
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "400";
-            }
-            return response;
-        }
-
-        public ResponseObject<AnaBaslik> UpdateAnaBaslik(AnaBaslik anaBaslik)
-        {
-            ResponseObject<AnaBaslik> response = new ResponseObject<AnaBaslik>();
-
-            try
-            {
-                anaBaslikManager.Add(anaBaslik);
-                response.IsSuccess = true;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-                response.Object = anaBaslik;
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-            }
-            return response;
-        }
-
-        public ResponseObject<ParaBirimi> UpdateParaBirimi(ParaBirimi paraBirimi)
-        {
-            ResponseObject<ParaBirimi> response = new ResponseObject<ParaBirimi>();
-
-            try
-            {
-                paraBirimiManager.Add(paraBirimi);
-                response.IsSuccess = true;
-                response.StatusCode = "200";
-                response.Explanation = "Success";
-                response.Object = paraBirimi;
-            }
-            catch (Exception ex)
-            {
-                response.IsSuccess = false;
-                response.Explanation = base.GetExceptionMessage(ex);
-                response.StatusCode = "400";
-            }
-            return response;
-        }
-        #endregion
-
-        #region DELETE
-
-        #endregion
-
 
     }
 }
+#endregion

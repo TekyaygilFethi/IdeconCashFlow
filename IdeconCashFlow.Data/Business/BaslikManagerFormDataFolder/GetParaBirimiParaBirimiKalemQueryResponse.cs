@@ -4,7 +4,7 @@ namespace IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder
 {
     public class GetParaBirimiParaBirimiKalemQueryResponse
     {
-        public int Week { get; set; }
+        public int DateIndicator { get; set; }
 
         public double Total { get; set; }
 

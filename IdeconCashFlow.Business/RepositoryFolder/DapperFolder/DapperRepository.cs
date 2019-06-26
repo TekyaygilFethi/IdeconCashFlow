@@ -1,61 +1,63 @@
 ﻿using Dapper;
 using IdeconCashFlow.Business.RepositoryFolder.BaseRepositoryFolder;
-using MySql.Data.MySqlClient;
+using MySql.Data.MySqlClient; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Data.SqlClient;
 
 namespace IdeconCashFlow.Business.RepositoryFolder.DapperFolder
 {
     public class DapperRepository : BaseRepository, IDapperRepository
     {
-        const string mySqlConnString = @"server=localhost;database=IdeconCashflowDapperDb;user=root;password=Idecon1*";
+        //const string mySqlConnString = @"server=localhost;database=IdeconCashflowDapperDb;user=root;password=Idecon1*";
+        //const string mysqlConn2 = @"server=00df25b4-efcf-4318-9370-aa6900ab767e.mysql.sequelizer.com;database=db00df25b4efcf43189370aa6900ab767e;uid=sfelytbmvctnjpof;pwd=NRk3HF4qtPJFfbooELqGxCXUkz2cTmBf8g3swtKkr3gskEwYZG8TtbXk2xRhMZDh";
         //const string msSqlConnString = @"Data Source=.\SQLEXPRESS;Initial Catalog=IdeconCashFlowDatabase;Integrated Security=True";
+        const string msSqlConnString = @"Server=4d296a8c-776a-40ed-8de9-aa5e00cb3b8b.sqlserver.sequelizer.com;Database=db4d296a8c776a40ed8de9aa5e00cb3b8b;User ID=tralejihdnhczgks;Password=FcUeNvojhJi4JtYFLZQ2ePxYtYFAvrWrQt436FjxzXtHozQWPSBeFEPZM5TXWUVY;";
+        //public virtual void Insert<T>(T entity)
+        //{
+        //    var columns = GetColumns<T>();
+        //    var stringOfColumns = string.Join(", ", columns);
+        //    var stringOfParameters = string.Join(", ", columns.Select(e => "@" + e));
+        //    var query = $"insert into {typeof(T).Name}Table ({stringOfColumns}) values ({stringOfParameters})";
 
-        public virtual void Insert<T>(T entity)
-        {
-            var columns = GetColumns<T>();
-            var stringOfColumns = string.Join(", ", columns);
-            var stringOfParameters = string.Join(", ", columns.Select(e => "@" + e));
-            var query = $"insert into {typeof(T).Name}Table ({stringOfColumns}) values ({stringOfParameters})";
+        //    using (var conn = new MySqlConnection(msSqlConnString))
+        //    {
+        //        conn.Open();
+        //        conn.Execute(query, entity);
+        //    }
+        //}
 
-            using (var conn = new MySqlConnection(mySqlConnString))
-            {
-                conn.Open();
-                conn.Execute(query, entity);
-            }
-        }
+        //public virtual void Delete<T>(T entity)
+        //{
+        //    var query = $"delete from {typeof(T).Name}s where Id = @Id";
 
-        public virtual void Delete<T>(T entity)
-        {
-            var query = $"delete from {typeof(T).Name}s where Id = @Id";
+        //    using (var connection = new MySqlConnection(msSqlConnString))
+        //    {
+        //        connection.Open();
+        //        connection.Execute(query, entity);
+        //    }
+        //}
 
-            using (var connection = new MySqlConnection(mySqlConnString))
-            {
-                connection.Open();
-                connection.Execute(query, entity);
-            }
-        }
+        //public virtual void Update<T>(T entity)
+        //{
+        //    var columns = GetColumns<T>();
+        //    var stringOfColumns = string.Join(", ", columns.Select(e => $"{e} = @{e}"));
+        //    var query = $"update {typeof(T).Name}s set {stringOfColumns} where Id = @Id";
 
-        public virtual void Update<T>(T entity)
-        {
-            var columns = GetColumns<T>();
-            var stringOfColumns = string.Join(", ", columns.Select(e => $"{e} = @{e}"));
-            var query = $"update {typeof(T).Name}s set {stringOfColumns} where Id = @Id";
-
-            using (var connection = new MySqlConnection(mySqlConnString))
-            {
-                connection.Open();
-                connection.Execute(query, entity);
-            }
-        }
+        //    using (var connection = new SqlConnection(msSqlConnString))
+        //    {
+        //        connection.Open();
+        //        connection.Execute(query, entity);
+        //    }
+        //}
 
         public virtual IEnumerable<T> Query<T>(string query)
         {
             if (!string.IsNullOrWhiteSpace(query))
             {
-                using (var connection = new MySqlConnection(mySqlConnString))
+                using (var connection = new SqlConnection(msSqlConnString))
                 {
                     try
                     {
@@ -64,7 +66,7 @@ namespace IdeconCashFlow.Business.RepositoryFolder.DapperFolder
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception(GetExceptionMessage(ex));
+                        return null;
                     }
                 }
             }
@@ -77,7 +79,7 @@ namespace IdeconCashFlow.Business.RepositoryFolder.DapperFolder
         {
             if (!string.IsNullOrWhiteSpace(query))
             {
-                using (var connection = new MySqlConnection(mySqlConnString))
+                using (var connection = new SqlConnection(msSqlConnString))
                 {
                     try
                     {

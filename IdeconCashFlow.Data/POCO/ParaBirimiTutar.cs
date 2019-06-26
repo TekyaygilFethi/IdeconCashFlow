@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IdeconCashFlow.Data.POCO
 {
+    [Table("ParaBirimiTutarTable")]
     public class ParaBirimiTutar
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity), JsonIgnore]

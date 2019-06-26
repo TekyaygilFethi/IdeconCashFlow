@@ -22,3 +22,27 @@ C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Database\obj\Debug\n
 C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csproj.CopyComplete
 C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.dll
 C:\Users\IDECON5\source\repos\IdeconCashFlow\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.pdb
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.deps.json
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.dll
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.pdb
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Data.dll
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Data.pdb
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csprojAssemblyReference.cache
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csproj.CoreCompileInputs.cache
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.AssemblyInfoInputs.cache
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.AssemblyInfo.cs
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csproj.CopyComplete
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.dll
+F:\Yazilim Projeler\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.pdb
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.deps.json
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.dll
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Database.pdb
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Data.dll
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\bin\Debug\netcoreapp2.2\IdeconCashFlow.Data.pdb
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csprojAssemblyReference.cache
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csproj.CoreCompileInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.AssemblyInfoInputs.cache
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.AssemblyInfo.cs
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.csproj.CopyComplete
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.dll
+C:\Users\IDECON5\source\repos\IdeconCashflowLAST\IdeconCashFlow-master\IdeconCashFlow.Database\obj\Debug\netcoreapp2.2\IdeconCashFlow.Database.pdb

@@ -18,5 +18,8 @@ namespace IdeconCashFlow.Data.Business.BaslikManagerFormDataFolder
         [JsonProperty("CurrencyDates")]
         public List<GetBaslikWithDateCurrencyDate> CurrencyDates { get; set; }
 
+        [JsonIgnore]
+        public int Week { get; set; }
+
     }
 }
