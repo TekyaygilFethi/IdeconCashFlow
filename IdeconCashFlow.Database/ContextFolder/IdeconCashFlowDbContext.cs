@@ -103,7 +103,7 @@ namespace IdeconCashFlow.Database.ContextFolder
             builder.UseSqlServer(@"Data Source=.\SQLEXPRESS;Initial Catalog=IdeconCashFlowDatabase;Integrated Security=True");
             builder.UseLoggerFactory(LoggerFactory)  //tie-up DbContext with LoggerFactory object
             .EnableSensitiveDataLogging();
-            //builder.UseSqlServer(@"Server=4d296a8c-776a-40ed-8de9-aa5e00cb3b8b.sqlserver.sequelizer.com;Database=db4d296a8c776a40ed8de9aa5e00cb3b8b;User ID=tralejihdnhczgks;Password=FcUeNvojhJi4JtYFLZQ2ePxYtYFAvrWrQt436FjxzXtHozQWPSBeFEPZM5TXWUVY;");
+            //builder.UseSqlServer(@"Server=Server;User ID=ID;");
             builder.UseLazyLoadingProxies();
             base.OnConfiguring(builder);
         }
