@@ -108,9 +108,7 @@ namespace IdeconCashFlow.Database.ContextFolder
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            //builder.UseMySql(@"server=localhost;database=IdeconCashflowDapperDb;user=root;password=Idecon1*");
-            //builder.UseMySql(@"server=00df25b4-efcf-4318-9370-aa6900ab767e.mysql.sequelizer.com;database=db00df25b4efcf43189370aa6900ab767e;uid=sfelytbmvctnjpof;pwd=NRk3HF4qtPJFfbooELqGxCXUkz2cTmBf8g3swtKkr3gskEwYZG8TtbXk2xRhMZDh");
-            builder.UseSqlServer(@"Server=4d296a8c-776a-40ed-8de9-aa5e00cb3b8b.sqlserver.sequelizer.com;Database=db4d296a8c776a40ed8de9aa5e00cb3b8b;User ID=tralejihdnhczgks;Password=FcUeNvojhJi4JtYFLZQ2ePxYtYFAvrWrQt436FjxzXtHozQWPSBeFEPZM5TXWUVY;");
+            builder.UseMySql(@"server=localhost;database=IdeconCashflowDapperDb;user=root;password=Idecon1*");
             builder.UseLoggerFactory(LoggerFactory)  //tie-up DbContext with LoggerFactory object
             .EnableSensitiveDataLogging();
             builder.UseLazyLoadingProxies();

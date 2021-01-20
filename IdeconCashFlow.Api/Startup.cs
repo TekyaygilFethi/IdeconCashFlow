@@ -49,13 +49,13 @@ namespace IdeconCashFlow.Api
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateAudience = true,
-                    ValidAudience = "ideconclients",
+                    ValidAudience = "..........",
                     ValidateIssuer = true,
-                    ValidIssuer = "idecon.com.tr",
+                    ValidIssuer = "........",
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes("IDECON1*Pwd is the secret key of this cashflow program"))
+                        Encoding.UTF8.GetBytes("......................."))
                 };
 
                 options.Events = new JwtBearerEvents
