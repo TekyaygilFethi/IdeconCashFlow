@@ -1,0 +1,608 @@
+{
+  "Login": {
+    "statusCode": 200,
+    "message": "İşlem başarılı",
+    "response":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJVc2VybmFtZSI6IkZldGhpVGVreWF5Z2lsIiwiUGFzc3dvcmQiOiI2emxIME1ZT1ZkUEI4OTFIUlhqTk1JY1JNUjN3eTR1SjQ2OFo5cG5BZW9FPSIsIlNpcmtldEtvZHUiOiIyMjIyIiwiTmFtZVN1cm5hbWUiOiJGZXRoaSBUZWt5YXlnaWwiLCJVc2VySUQiOiIyIiwiUm9sIjoiQWRtaW4iLCJleHAiOjE1NjE3NjI0MjUsImlzcyI6ImlkZWNvbi5jb20udHIiLCJhdWQiOiJpZGVjb25jbGllbnRzIn0.y5p96S2xyNI96IofMSHevPkAdMg35BF3yMLNNOaWw0A"
+  },
+  "GetAllHeaders": {
+    "statusCode": 200,
+    "message": "İşlem başarılı",
+    "response": {
+      "totalPageCount": 6,
+      "itemCount": 10,
+      "totals": [
+        {
+          "key": "try",
+          "value": -1865
+        },
+        {
+          "key": "usd",
+          "value": 245
+        },
+        {
+          "key": "eur",
+          "value": -40
+        },
+        {
+          "key": "gbp",
+          "value": 385
+        },
+        {
+          "key": "jpy",
+          "value": 125
+        }
+      ],
+      "headers": {
+        "income": [
+          {
+            "id": "10525-50153-5216",
+            "flowDirectionSymbol": "+",
+            "flowDirectionExplanation": "Giriş",
+            "title": "Banka bakiyeleri",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 10
+              },
+              {
+                "key": "usd",
+                "value": 150
+              },
+              {
+                "key": "eur",
+                "value": 15
+              },
+              {
+                "key": "gbp",
+                "value": 120
+              },
+              {
+                "key": "jpy",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "+",
+            "flowDirectionExplanation": "Giriş",
+            "title": "Müşteri tahsilat",
+            "currencies": [
+              {
+                "key": "try",
+                "value": -1100
+              },
+              {
+                "key": "usd",
+                "value": -100
+              },
+              {
+                "key": "eur",
+                "value": 0
+              },
+              {
+                "key": "gbp",
+                "value": -20
+              },
+              {
+                "key": "jpy",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "+",
+            "flowDirectionExplanation": "Giriş",
+            "title": "Ürün Geliri",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 1050
+              },
+              {
+                "key": "usd",
+                "value": 100
+              },
+              {
+                "key": "eur",
+                "value": 10
+              },
+              {
+                "key": "gbp",
+                "value": 0
+              },
+              {
+                "key": "jpy",
+                "value": 175
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "+",
+            "flowDirectionExplanation": "Giriş",
+            "title": "Müşteri Ödemesi",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 675
+              },
+              {
+                "key": "usd",
+                "value": 245
+              },
+              {
+                "key": "eur",
+                "value": 105
+              },
+              {
+                "key": "gbp",
+                "value": 285
+              },
+              {
+                "key": "jpy",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-00221",
+            "flowDirectionSymbol": "+",
+            "flowDirectionExplanation": "Giriş",
+            "title": "Faturalar",
+            "currencies": [
+              {
+                "key": "try",
+                "value": -2500
+              },
+              {
+                "key": "usd",
+                "value": -100
+              },
+              {
+                "key": "eur",
+                "value": -170
+              },
+              {
+                "key": "gbp",
+                "value": 0
+              },
+              {
+                "key": "jpy",
+                "value": -190
+              }
+            ]
+          }
+        ],
+        "incomeTotals": [
+          {
+            "key": "try",
+            "value": -1865
+          },
+          {
+            "key": "usd",
+            "value": 295
+          },
+          {
+            "key": "eur",
+            "value": -40
+          },
+          {
+            "key": "gbp",
+            "value": 385
+          },
+          {
+            "key": "jpy",
+            "value": 125
+          }
+        ],
+        "outcome": [
+          {
+            "id": "10525-50153-5216",
+            "flowDirectionSymbol": "-",
+            "flowDirectionExplanation": "Çıkış",
+            "title": "Banka bakiyeleri",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 10
+              },
+              {
+                "key": "usd",
+                "value": 150
+              },
+              {
+                "key": "eur",
+                "value": 15
+              },
+              {
+                "key": "gbp",
+                "value": 120
+              },
+              {
+                "key": "jpy",
+                "value": 140
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "-",
+            "flowDirectionExplanation": "Çıkış",
+            "title": "Müşteri tahsilat",
+            "currencies": [
+              {
+                "key": "try",
+                "value": -1100
+              },
+              {
+                "key": "usd",
+                "value": -100
+              },
+              {
+                "key": "eur",
+                "value": 0
+              },
+              {
+                "key": "gbp",
+                "value": -20
+              },
+              {
+                "key": "jpy",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "-",
+            "flowDirectionExplanation": "Çıkış",
+            "title": "Ürün Geliri",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 1050
+              },
+              {
+                "key": "usd",
+                "value": 100
+              },
+              {
+                "key": "eur",
+                "value": 10
+              },
+              {
+                "key": "gbp",
+                "value": 0
+              },
+              {
+                "key": "jpy",
+                "value": 175
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-0011",
+            "flowDirectionSymbol": "-",
+            "flowDirectionExplanation": "Çıkış",
+            "title": "Müşteri Ödemesi",
+            "currencies": [
+              {
+                "key": "try",
+                "value": 675
+              },
+              {
+                "key": "usd",
+                "value": 245
+              },
+              {
+                "key": "eur",
+                "value": 105
+              },
+              {
+                "key": "gbp",
+                "value": 285
+              },
+              {
+                "key": "jpy",
+                "value": 0
+              }
+            ]
+          },
+          {
+            "id": "10525-50153-00221",
+            "flowDirectionSymbol": "-",
+            "flowDirectionExplanation": "Çıkış",
+            "title": "Faturalar",
+            "currencies": [
+              {
+                "key": "try",
+                "value": -2500
+              },
+              {
+                "key": "usd",
+                "value": -100
+              },
+              {
+                "key": "eur",
+                "value": -170
+              },
+              {
+                "key": "gbp",
+                "value": 0
+              },
+              {
+                "key": "jpy",
+                "value": -190
+              }
+            ]
+          }
+        ],
+        "outcomeTotals": [
+          {
+            "key": "try",
+            "value": -1865
+          },
+          {
+            "key": "usd",
+            "value": 295
+          },
+          {
+            "key": "eur",
+            "value": -40
+          },
+          {
+            "key": "gbp",
+            "value": 385
+          },
+          {
+            "key": "jpy",
+            "value": 125
+          }
+        ]
+      }
+    }
+  },
+  "getDetail": {
+    "statusCode": 200,
+    "message": "İşlem başarılı",
+    "response": {
+      "totals": [
+        {
+          "AnaBaslikID": "11111",
+          "ParaBirimi": "TRY",
+          "ToplamTutar": 1915
+        },
+        {
+          "AnaBaslikID": "11111",
+          "ParaBirimi": "USD",
+          "ToplamTutar": 1220
+        },
+        {
+          "AnaBaslikID": "11111",
+          "ParaBirimi": "EUR",
+          "ToplamTutar": 655
+        },
+        {
+          "AnaBaslikID": "222222",
+          "ParaBirimi": "TRY",
+          "ToplamTutar": 2190
+        },
+        {
+          "AnaBaslikID": "222222",
+          "ParaBirimi": "USD",
+          "ToplamTutar": 1050
+        },
+        {
+          "AnaBaslikID": "222222",
+          "ParaBirimi": "EUR",
+          "ToplamTutar": 890
+        },
+        {
+          "AnaBaslikID": "333333",
+          "ParaBirimi": "TRY",
+          "ToplamTutar": 4740
+        },
+        {
+          "AnaBaslikID": "333333",
+          "ParaBirimi": "USD",
+          "ToplamTutar": 585
+        },
+        {
+          "AnaBaslikID": "333333",
+          "ParaBirimi": "EUR",
+          "ToplamTutar": 1070
+        }
+      ],
+      "getDetail": [
+        {
+          "AnaBaslikID": "11111",
+          "AnaBaslikTanim": "Banka bakiyeleri",
+          "chartModel": [
+            {
+              "name": "USD",
+              "trueValue": 10.1,
+              "value": 49.5
+            },
+            {
+              "name": "TRY",
+              "trueValue": 49.5,
+              "value": 49.5
+            },
+            {
+              "name": "EUR",
+              "trueValue": 8.01,
+              "value": 49.5
+            }
+          ],
+          "Contents": [
+            {
+              "ParaBirimi": "TRY",
+              "currencyDates": [
+                {
+                  "VadeTarihi": "21.05.2019",
+                  "Tutar": 5
+                },
+                {
+                  "VadeTarihi": "22.05.2019",
+                  "Tutar": -25
+                },
+                {
+                  "VadeTarihi": "23.05.2019",
+                  "Tutar": 45
+                },
+                {
+                  "VadeTarihi": "24.05.2019",
+                  "Tutar": -15
+                },
+                {
+                  "VadeTarihi": "25.05.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "26.05.2019",
+                  "Tutar": 5
+                },
+                {
+                  "VadeTarihi": "27.05.2019",
+                  "Tutar": -25
+                },
+                {
+                  "VadeTarihi": "28.05.2019",
+                  "Tutar": 45
+                },
+                {
+                  "VadeTarihi": "29.05.2019",
+                  "Tutar": -15
+                },
+                {
+                  "VadeTarihi": "30.05.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "01.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "02.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "03.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "04.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "05.06.2019",
+                  "Tutar": 25
+                }
+              ]
+            },
+            {
+              "ParaBirimi": "USD",
+              "currencyDates": [
+                {
+                  "VadeTarihi": "21.05.2019",
+                  "Tutar": 5
+                },
+                {
+                  "VadeTarihi": "22.05.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "23.05.2019",
+                  "Tutar": 45
+                },
+                {
+                  "VadeTarihi": "24.05.2019",
+                  "Tutar": 15
+                },
+                {
+                  "VadeTarihi": "25.05.2019",
+                  "Tutar": -25
+                },
+                {
+                  "VadeTarihi": "26.05.2019",
+                  "Tutar": 5
+                },
+                {
+                  "VadeTarihi": "27.05.2019",
+                  "Tutar": -25
+                },
+                {
+                  "VadeTarihi": "28.05.2019",
+                  "Tutar": 45
+                },
+                {
+                  "VadeTarihi": "29.05.2019",
+                  "Tutar": -15
+                },
+                {
+                  "VadeTarihi": "30.05.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "01.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "02.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "03.06.2019",
+                  "Tutar": 25
+                },
+                {
+                  "VadeTarihi": "04.06.2019",
+                  "Tutar": -25
+                },
+                {
+                  "VadeTarihi": "05.06.2019",
+                  "Tutar": 25
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "exchanges": {
+    "statusCode": 200,
+    "message": "İşlem başarılı",
+    "response": {
+      "mainExchange": "TRY",
+      "exchanges": [
+        {
+          "key": "EUR",
+          "value": 6.012
+        },
+        {
+          "key": "SAR",
+          "value": 2
+        },
+        {
+          "key": "USD",
+          "value": 5.012
+        },
+        {
+          "key": "TRY",
+          "value": 1
+        },
+        {
+          "key": "GBP",
+          "value": 8
+        },
+        {
+          "key": "JPY",
+          "value": 3
+        }
+      ]
+    }
+  }
+}

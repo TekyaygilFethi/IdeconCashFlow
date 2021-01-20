@@ -1,0 +1,6 @@
+{
+  "apiUrl": "//http://cashflow.idecon.com.tr/api/",
+  "basePath": "/",
+  "env": "prod"
+  }
+  
